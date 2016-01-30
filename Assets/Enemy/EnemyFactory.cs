@@ -11,6 +11,9 @@ public class EnemyFactory : MonoBehaviour
 
 	private List<Enemy> _spawns;
 
+    private bool AlreadySpawnedThisMeasure = false;
+    private int CurrentTime = 0;
+
     void Start()
     {
         _spawns = new List<Enemy>();
@@ -20,18 +23,27 @@ public class EnemyFactory : MonoBehaviour
 
     void Update()
     {
-        var enemies = GetSpawns(Time.time);
-        foreach (var enemy in enemies)
+        if (!AlreadySpawnedThisMeasure && Timer.CurrentBeat == 0)
         {
-            SpawnEnemy(enemy);
+            var enemies = GetSpawns();
+            foreach (var enemy in enemies)
+            {
+                SpawnEnemy(enemy);
+            }
+            AlreadySpawnedThisMeasure = true;
+        }
+
+        if (Timer.CurrentBeat != 0)
+        {
+            AlreadySpawnedThisMeasure = false;
         }
     }
     
-    public List<Enemy> GetSpawns(float currentTime){
+    public List<Enemy> GetSpawns(){
         var enemiesToSpawn = new List<Enemy>();
         foreach (var e in _spawns)
         {
-            if (e.Time <= currentTime)
+            if (e.Time <= CurrentTime)
             {
                 enemiesToSpawn.Add(e);
             }
@@ -42,6 +54,7 @@ public class EnemyFactory : MonoBehaviour
             _spawns.Remove(e);
         }
 
+        CurrentTime++;
         return enemiesToSpawn;
     }
 
@@ -49,7 +62,7 @@ public class EnemyFactory : MonoBehaviour
     {
         var clone = Instantiate(EnemyGameObject);
         clone.transform.position = Notes.KeyPositions[enemy.Lane] + Vector2.up * OffsetFromNote;
-        clone.GetComponent<Rigidbody2D>().velocity = Vector2.down * enemy.Speed;
+        //clone.GetComponent<Rigidbody2D>().velocity = Vector2.down * enemy.Speed;
         clone.GetComponent<EnemyBehaviour>().SetEnemy(enemy);
     }
 
@@ -70,7 +83,7 @@ public class EnemyFactory : MonoBehaviour
 
         var probabilityOfEnemyCount = new[] {0.1, 0.8, 1};
 
-        for (int i = 0; i < endTime; i ++)
+        for (int i = 1; i < endTime; i ++)
         {
             var r = random.NextDouble();
             for (int n = 0; n < probabilityOfEnemyCount.Length; n++)

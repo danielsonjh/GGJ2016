@@ -8,12 +8,25 @@ public class EnemyBehaviour : MonoBehaviour
 
     public Enemy Enemy;
 
+    private static Vector2 MovementVelocity = new Vector2(0,-2.5f);
 
     public void SetEnemy(Enemy enemy)
     {
         Enemy = enemy;
         GetComponent<SpriteRenderer>().color = Notes.EntityColor[Enemy.
             Color];
+    }
+
+    void Update()
+    {
+        if (Timer.CurrentBeat == 0)
+        {
+            GetComponent<Rigidbody2D>().velocity = MovementVelocity;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
