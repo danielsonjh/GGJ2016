@@ -12,10 +12,10 @@ public class EnemyBehaviour : MonoBehaviour
         if (name == "Laser(Clone)")
         {
             Stats.Instance.Score++;
-            var deathExplosion = Instantiate(DeathGameObject);
-            deathExplosion.transform.position = this.transform.position;
-            deathExplosion.GetComponent<ParticleSystem>().Play();
         }
+        var deathExplosion = Instantiate(DeathGameObject);
+        deathExplosion.transform.position = this.transform.position;
+        deathExplosion.GetComponent<ParticleSystem>().Play();
         Destroy(gameObject);
     }
 }
