@@ -23,15 +23,30 @@ public class Keyboard : MonoBehaviour
                 PressKey(Note.C);
             }
         }
+
+        if (Timer.IsColorBeat())
+        {
+            ChangeColor();
+        }
     }
 
-    public void PressKey(Note note)
+    private void PressKey(Note note)
     {
-        Debug.Log(note);
+        if (Timer.IsColorBeat())
+        {
+            var laser = Instantiate(Laser);
+            laser.transform.position = Notes.KeyPositions[note];
+            Destroy(laser, NoteTime);
+        }
+        else
+        {
+            // Add lane selector
+        }
+    }
 
-        var laser = Instantiate(Laser);
-        laser.transform.position = Notes.KeyPositions[note];
-        Destroy(laser, NoteTime);
+    private void ChangeColor()
+    {
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
