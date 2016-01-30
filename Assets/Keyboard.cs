@@ -1,14 +1,25 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class Keyboard : MonoBehaviour
 {
-    public const float NoteTime = 0.5f;
+    public const float LaserDuration = 0.3f;
     public GameObject Laser;
-    
+    public GameObject LaneSelector;
+
+    private readonly List<Note> _selectedLanes = new List<Note>();
+
+    private SpriteRenderer _grayBoxRenderer;
+
+    void Start()
+    {
+        _grayBoxRenderer = transform.FindChild("GrayBox").GetComponent<SpriteRenderer>();
+    }
+
     void Update()
     {
-        if (Timer.IsOnBeat())
+        if (Timer.IsOnBeat)
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
@@ -23,19 +34,46 @@ public class Keyboard : MonoBehaviour
                 PressKey(Note.C);
             }
         }
-    }
 
-    public void PressKey(Note note)
-    {
-        Debug.Log(note);
+        if (Timer.IsStartOfLanePhase)
+        {
+            _selectedLanes.Clear();
+        }
 
-        var laser = Instantiate(Laser);
-        laser.transform.position = Notes.KeyPositions[note];
-        Destroy(laser, NoteTime);
+        ShowGrayBox(!Timer.IsColorBeat);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Score.Instance.Lives--;
+        Stats.Instance.Lives--;
+    }
+
+    private void PressKey(Note note)
+    {
+        if (Timer.IsColorBeat)
+        {
+            foreach (var selectedLane in _selectedLanes)
+            {
+                var laser = InstantiateAt(Laser, selectedLane);
+                Destroy(laser, LaserDuration);
+            }
+        }
+        else
+        {
+            InstantiateAt(LaneSelector, note);
+            _selectedLanes.Add(note);
+        }
+    }
+
+    private void ShowGrayBox(bool shown)
+    {
+        _grayBoxRenderer.enabled = shown;
+    }
+
+    private GameObject InstantiateAt(GameObject prefab, Note note)
+    {
+        var clone = Instantiate(prefab);
+        clone.transform.position = Notes.KeyPositions[note];
+        return clone;
     }
 }
