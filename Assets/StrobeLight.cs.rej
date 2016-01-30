@@ -1,0 +1,15 @@
+diff a/Assets/StrobeLight.cs b/Assets/StrobeLight.cs	(rejected hunks)
+@@ -7,11 +7,11 @@
+ 
+     void Update ()
+ 	{
+-        if (Timer.isOnBeat)
++        if (Timer.IsOnBeat)
+         {
+             LerpCameraColor(OffbeatColor, Timer.TimeInBeat / Timer.BeatThreshold);
+         }
+-        else if (!Time.isOnBeat)
++        else if (!Time.IsOnBeat)
+         {
+             LerpCameraColor(BeatColor, Timer.TimeInBeat / Timer.BeatThreshold);
+         }
