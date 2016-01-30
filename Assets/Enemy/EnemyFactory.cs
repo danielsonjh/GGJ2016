@@ -6,6 +6,7 @@ public class EnemyFactory : MonoBehaviour
 {
     public GameObject EnemyGameObject;
 
+    private const int EnemySpeed = 2;
     private const int OffsetFromNote = 10;
 
 	private List<Enemy> _spawns;
@@ -97,7 +98,7 @@ public class EnemyFactory : MonoBehaviour
                     _spawns.Add(new Enemy()
                     {
                         Time = i,
-                        Speed = 2f,
+                        Speed = EnemySpeed,
                         Lane = lane,
                         Color = color,
                         Type = type

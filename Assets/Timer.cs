@@ -2,7 +2,7 @@
 
 public class Timer : MonoBehaviour
 {
-    public const float BeatThreshold = 0.25f;
+    public const float BeatThreshold = 0.35f;
     public const float TimePerBeat = 0.6f;
     public const int BeatsPerMeasure = 4;
 

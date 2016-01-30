@@ -19,14 +19,14 @@ public class EnemyBehaviour : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         var name = other.gameObject.name;
-        if (name == "Laser(Clone)")
+        if (name == "Keyboard" || name == "Laser(Clone)" && other.GetComponent<LazerBehavior>().Note == Enemy.Color)
         {
+            var deathExplosion = Instantiate(DeathGameObject);
+            deathExplosion.transform.position = this.transform.position;
+            deathExplosion.GetComponent<ParticleSystem>().Play();
+            Destroy(gameObject);
             Stats.Instance.Score++;
         }
-        var deathExplosion = Instantiate(DeathGameObject);
-        deathExplosion.transform.position = this.transform.position;
-        deathExplosion.GetComponent<ParticleSystem>().Play();
-        Destroy(gameObject);
     }
 }
 
