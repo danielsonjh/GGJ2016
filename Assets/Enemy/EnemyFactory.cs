@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyFactory : MonoBehaviour
 {
     public GameObject EnemyGameObject;
-    private const int OffsetFromNote = 5;
+    private const int OffsetFromNote = 10;
 	private List<Enemy> _spawns;
 
     void Start()
