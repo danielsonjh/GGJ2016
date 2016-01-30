@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 2fd464ee43169ee43bcbb8ecca68474f
-timeCreated: 1454137103
+timeCreated: 1454181074
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - DeathGameObject: {fileID: 144872, guid: aacea697d5fb3ed4a861fc7bcfe7ccae, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

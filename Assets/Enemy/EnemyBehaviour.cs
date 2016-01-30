@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-public class EnemyBehaviour : MonoBehaviour {
+[RequireComponent(typeof (Collider2D))]
+public class EnemyBehaviour : MonoBehaviour
+{
+
+    public GameObject DeathGameObject;
 
     public Enemy Enemy;
 
@@ -20,6 +23,10 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             Stats.Instance.Score++;
         }
+        var deathExplosion = Instantiate(DeathGameObject);
+        deathExplosion.transform.position = this.transform.position;
+        deathExplosion.GetComponent<ParticleSystem>().Play();
         Destroy(gameObject);
     }
 }
+
