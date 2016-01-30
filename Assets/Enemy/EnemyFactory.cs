@@ -50,6 +50,71 @@ public class EnemyFactory : MonoBehaviour
         clone.transform.position = Note.KeyPositions[enemy.Note] + Vector2.up * OffsetFromNote;
         clone.GetComponent<Rigidbody2D>().velocity = Vector2.down * enemy.Speed;
     }
+
+    public void ProceduralSpawns(int seed = 0)
+    {
+        System.Random random;
+        if(seed == 0)
+            random = new System.Random();
+        else
+            random = new System.Random(seed);
+        
+        
+        string[] notes = {Note.A, Note.B, Note.C};
+        var types = 3; //number of potential types
+        var time = 20; //number of waves to generate for
+
+        var pZero = 0.1; //probability "tiers" of spawning 0, 1, or 2 enemies in a wave
+        var pOne = 0.8;
+        var pTwo = 1.0;
+        
+
+
+        for (int i = 0; i < time; i++)
+        {
+            var r = random.NextDouble();
+            if (r < pZero)
+            {
+                //wave of 0 enemies
+            }
+            else if (r < pOne)
+            {
+                //wave of 1 enemy
+                _spawns.Add(new Enemy()
+                {
+                    Time = i,
+                    Speed = 1,
+                    Note = notes[random.Next(notes.Length)],
+                    Type = random.Next(types)
+                });
+            }
+            else if (r < pTwo)
+            {
+                //wave of 2 enemies
+                var n1 = notes[random.Next(notes.Length)];
+                _spawns.Add(new Enemy() {
+                    Time = i,
+                    Speed = 1,
+                    Note = n1,
+                    Type = random.Next(types)
+                });
+
+                var n2 = notes[random.Next(notes.Length)];
+                while(n2 == n1)
+                    n2 = notes[random.Next(notes.Length)];
+                _spawns.Add(new Enemy() {
+                    Time = i,
+                    Speed = 1,
+                    Note = n2,
+                    Type = random.Next(types)
+                });
+
+            }
+        }
+
+
+    }
+
 }
 
 public class Enemy
