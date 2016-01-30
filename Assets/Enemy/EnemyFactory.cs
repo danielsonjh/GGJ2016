@@ -1,20 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class EnemyFactory : MonoBehaviour
 {
     public GameObject EnemyGameObject;
+
     private const int OffsetFromNote = 10;
+
 	private List<Enemy> _spawns;
 
     void Start()
     {
         _spawns = new List<Enemy>();
 
-        _spawns.Add(new Enemy { Time = 1, Speed = 1, Type = 1, Note = Note.A });
-        _spawns.Add(new Enemy { Time = 2, Speed = 1, Type = 1, Note = Note.C });
-        _spawns.Add(new Enemy { Time = 3, Speed = 1, Type = 1, Note = Note.A });
-        _spawns.Add(new Enemy { Time = 4, Speed = 1, Type = 1, Note = Note.B });
+        ProceduralSpawns();
     }
 
     void Update()
@@ -47,7 +47,7 @@ public class EnemyFactory : MonoBehaviour
     public void SpawnEnemy(Enemy enemy)
     {
         var clone = Instantiate(EnemyGameObject);
-        clone.transform.position = Note.KeyPositions[enemy.Note] + Vector2.up * OffsetFromNote;
+        clone.transform.position = Notes.KeyPositions[enemy.Note] + Vector2.up * OffsetFromNote;
         clone.GetComponent<Rigidbody2D>().velocity = Vector2.down * enemy.Speed;
     }
 
@@ -55,77 +55,42 @@ public class EnemyFactory : MonoBehaviour
     {
         System.Random random;
         if(seed == 0)
-            random = new System.Random();
+        {
+            random = new Random();
+        }
         else
-            random = new System.Random(seed);
+        {
+            random = new Random(seed);
+        }
         
-        
-        string[] notes = {Note.A, Note.B, Note.C};
         var types = 3; //number of potential types
-        var time = 20; //number of waves to generate for
+        var endTime = 20;
 
-        var pZero = 0.1; //probability "tiers" of spawning 0, 1, or 2 enemies in a wave
-        var pOne = 0.8;
-        var pTwo = 1.0;
-        
+        var probabilityOfEnemyCount = new[] {0.1, 0.8, 1};
 
-
-        for (int i = 0; i < time; i++)
+        for (int i = 0; i < endTime; i += 2)
         {
             var r = random.NextDouble();
-            if (r < pZero)
+            for (int n = 0; n < probabilityOfEnemyCount.Length; n++)
             {
-                //wave of 0 enemies
-            }
-            else if (r < pOne)
-            {
-                //wave of 1 enemy
-                _spawns.Add(new Enemy()
+                if (r > probabilityOfEnemyCount[n]) continue;
+
+                for (int j = 0; j < n; j++)
                 {
-                    Time = i,
-                    Speed = 1,
-                    Note = notes[random.Next(notes.Length)],
-                    Type = random.Next(types)
-                });
-            }
-            else if (r < pTwo)
-            {
-                //wave of 2 enemies
-                var n1 = notes[random.Next(notes.Length)];
-                _spawns.Add(new Enemy() {
-                    Time = i,
-                    Speed = 1,
-                    Note = n1,
-                    Type = random.Next(types)
-                });
+                    var note = Notes.GetRandom();
+                    var type = random.Next(types);
 
-                var n2 = notes[random.Next(notes.Length)];
-                while(n2 == n1)
-                    n2 = notes[random.Next(notes.Length)];
-                _spawns.Add(new Enemy() {
-                    Time = i,
-                    Speed = 1,
-                    Note = n2,
-                    Type = random.Next(types)
-                });
+                    _spawns.Add(new Enemy()
+                    {
+                        Time = i,
+                        Speed = 1,
+                        Note = note,
+                        Type = type
+                    });
+                }
 
+                break;
             }
         }
-
-
-    }
-
-}
-
-public class Enemy
-{
-    public float Time;
-    public float Speed;
-    public string Note;
-    public int Type;
-    
-    public override string ToString() {
-        return "Enemy: {Time = " + Time + ", Type = " + Type + ", Note = " + Note + "}";
     }
 }
-

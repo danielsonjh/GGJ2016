@@ -4,9 +4,7 @@ public class Keyboard : MonoBehaviour
 {
     public const float NoteTime = 0.5f;
     public GameObject Laser;
-
     
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
@@ -23,12 +21,12 @@ public class Keyboard : MonoBehaviour
         }
     }
 
-    public void PressKey(string note)
+    public void PressKey(Note note)
     {
         Debug.Log(note);
 
         var laser = Instantiate(Laser);
-        laser.transform.position = Note.KeyPositions[note];
+        laser.transform.position = Notes.KeyPositions[note];
         Destroy(laser, NoteTime);
     }
 }
