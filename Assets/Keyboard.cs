@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class Keyboard : MonoBehaviour
 {
-    public const float NoteTime = 0.5f;
+    public const float LaserDuration = 0.3f;
     public GameObject Laser;
+    public GameObject LaneSelector;
+
+    private readonly List<Note> _selectedLanes = new List<Note>();
 
     private SpriteRenderer _grayBoxRenderer;
 
@@ -15,7 +19,7 @@ public class Keyboard : MonoBehaviour
 
     void Update()
     {
-        if (Timer.IsOnBeat())
+        if (Timer.IsOnBeat)
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
@@ -30,9 +34,13 @@ public class Keyboard : MonoBehaviour
                 PressKey(Note.C);
             }
         }
-        Debug.Log(Timer.CurrentBeat);
-        Debug.Log(Timer.IsColorBeat());
-        ShowGrayBox(!Timer.IsColorBeat());
+
+        if (Timer.IsStartOfLanePhase)
+        {
+            _selectedLanes.Clear();
+        }
+
+        ShowGrayBox(!Timer.IsColorBeat);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -42,20 +50,30 @@ public class Keyboard : MonoBehaviour
 
     private void PressKey(Note note)
     {
-        if (Timer.IsColorBeat())
+        if (Timer.IsColorBeat)
         {
-            var laser = Instantiate(Laser);
-            laser.transform.position = Notes.KeyPositions[note];
-            Destroy(laser, NoteTime);
+            foreach (var selectedLane in _selectedLanes)
+            {
+                var laser = InstantiateAt(Laser, selectedLane);
+                Destroy(laser, LaserDuration);
+            }
         }
         else
         {
-            // Add lane selector
+            InstantiateAt(LaneSelector, note);
+            _selectedLanes.Add(note);
         }
     }
 
     private void ShowGrayBox(bool shown)
     {
         _grayBoxRenderer.enabled = shown;
+    }
+
+    private GameObject InstantiateAt(GameObject prefab, Note note)
+    {
+        var clone = Instantiate(prefab);
+        clone.transform.position = Notes.KeyPositions[note];
+        return clone;
     }
 }
