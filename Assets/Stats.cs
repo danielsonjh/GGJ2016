@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Score : MonoBehaviour
+public class Stats : MonoBehaviour
 {
-    public int Value;
+    public int Score;
     public int Lives;
 
-    public static Score Instance { get; private set; }
+    public static Stats Instance { get; private set; }
 
     private Text _scoreText;
 
@@ -25,7 +25,7 @@ public class Score : MonoBehaviour
 	
 	void Update ()
 	{
-	    _scoreText.text = "SCORE: " + Value.ToString() + "\n" +
+	    _scoreText.text = "SCORE: " + Score.ToString() + "\n" +
                           "LIVES: " + Lives.ToString();
 	}
 }

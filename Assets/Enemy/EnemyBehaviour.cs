@@ -8,7 +8,7 @@ public class EnemyBehaviour : MonoBehaviour {
         var name = other.gameObject.name;
         if (name == "Laser(Clone)")
         {
-            Score.Instance.Value++;
+            Stats.Instance.Score++;
         }
         Destroy(gameObject);
     }

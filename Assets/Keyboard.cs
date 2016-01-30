@@ -5,7 +5,14 @@ public class Keyboard : MonoBehaviour
 {
     public const float NoteTime = 0.5f;
     public GameObject Laser;
-    
+
+    private SpriteRenderer _grayBoxRenderer;
+
+    void Start()
+    {
+        _grayBoxRenderer = transform.FindChild("GrayBox").GetComponent<SpriteRenderer>();
+    }
+
     void Update()
     {
         if (Timer.IsOnBeat())
@@ -23,11 +30,14 @@ public class Keyboard : MonoBehaviour
                 PressKey(Note.C);
             }
         }
+        Debug.Log(Timer.CurrentBeat);
+        Debug.Log(Timer.IsColorBeat());
+        ShowGrayBox(!Timer.IsColorBeat());
+    }
 
-        if (Timer.IsColorBeat())
-        {
-            ChangeColor();
-        }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Stats.Instance.Lives--;
     }
 
     private void PressKey(Note note)
@@ -44,13 +54,8 @@ public class Keyboard : MonoBehaviour
         }
     }
 
-    private void ChangeColor()
+    private void ShowGrayBox(bool shown)
     {
-        
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Score.Instance.Lives--;
+        _grayBoxRenderer.enabled = shown;
     }
 }

@@ -28,6 +28,6 @@ public class Timer : MonoBehaviour
 
     public static bool IsColorBeat()
     {
-        return CurrentBeat < BeatsPerMeasure / 2;
+        return CurrentBeat >= BeatsPerMeasure / 2;
     }
 }
