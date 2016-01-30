@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-public class EnemyBehaviour : MonoBehaviour {
+[RequireComponent(typeof (Collider2D))]
+public class EnemyBehaviour : MonoBehaviour
+{
+
+    public GameObject DeathGameObject;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -9,7 +12,11 @@ public class EnemyBehaviour : MonoBehaviour {
         if (name == "Laser(Clone)")
         {
             Score.Instance.Value++;
+            var deathExplosion = Instantiate(DeathGameObject);
+            deathExplosion.transform.position = this.transform.position;
+            deathExplosion.GetComponent<ParticleSystem>().Play();
         }
         Destroy(gameObject);
     }
 }
+
