@@ -1,31 +1,25 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Keyboard : MonoBehaviour
 {
     public const float NoteTime = 0.5f;
     public GameObject Laser;
 
-    private readonly Dictionary<string, Vector2> _keyPosition = new Dictionary<string, Vector2>()
-    {
-        {"A", new Vector2(-2, 0)},
-        {"B", new Vector2(0, 0)},
-        {"C", new Vector2(2, 0)},
-    };
+    
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            PressKey("A");
+            PressKey(Note.A);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            PressKey("B");
+            PressKey(Note.B);
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            PressKey("C");
+            PressKey(Note.C);
         }
     }
 
@@ -34,7 +28,7 @@ public class Keyboard : MonoBehaviour
         Debug.Log(note);
 
         var laser = Instantiate(Laser);
-        laser.transform.position = _keyPosition[note];
+        laser.transform.position = Note.KeyPositions[note];
         Destroy(laser, NoteTime);
     }
 }
