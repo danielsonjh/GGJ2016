@@ -7,17 +7,20 @@ public class Keyboard : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Timer.IsOnBeat())
         {
-            PressKey(Note.A);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            PressKey(Note.B);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            PressKey(Note.C);
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                PressKey(Note.A);
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                PressKey(Note.B);
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                PressKey(Note.C);
+            }
         }
     }
 
