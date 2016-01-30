@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class Keyboard : MonoBehaviour
 {
     public const float NoteTime = 0.5f;
@@ -31,5 +32,10 @@ public class Keyboard : MonoBehaviour
         var laser = Instantiate(Laser);
         laser.transform.position = Notes.KeyPositions[note];
         Destroy(laser, NoteTime);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Score.Instance.Lives--;
     }
 }

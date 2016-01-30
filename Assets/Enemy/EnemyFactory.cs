@@ -68,25 +68,36 @@ public class EnemyFactory : MonoBehaviour
 
         var probabilityOfEnemyCount = new[] {0.1, 0.8, 1};
 
-        for (int i = 0; i < endTime; i += 2)
+        for (int i = 0; i < endTime; i ++)
         {
             var r = random.NextDouble();
             for (int n = 0; n < probabilityOfEnemyCount.Length; n++)
             {
                 if (r > probabilityOfEnemyCount[n]) continue;
+                var notesAlreadySpawned = new List<Note>();
 
                 for (int j = 0; j < n; j++)
                 {
+                    if (notesAlreadySpawned.Count >= probabilityOfEnemyCount.Length)
+                    {
+                        break;
+                    }
+
                     var note = Notes.GetRandom();
+                    while (notesAlreadySpawned.Contains(note))
+                    {
+                        note = Notes.GetRandom();
+                    }
                     var type = random.Next(types);
 
                     _spawns.Add(new Enemy()
                     {
                         Time = i,
-                        Speed = 1,
+                        Speed = 2f,
                         Note = note,
                         Type = type
                     });
+                    notesAlreadySpawned.Add(note);
                 }
 
                 break;

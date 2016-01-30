@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     public int Value;
+    public int Lives;
 
     public static Score Instance { get; private set; }
 
@@ -24,6 +25,7 @@ public class Score : MonoBehaviour
 	
 	void Update ()
 	{
-	    _scoreText.text = Value.ToString();
+	    _scoreText.text = "SCORE: " + Value.ToString() + "\n" +
+                          "LIVES: " + Lives.ToString();
 	}
 }
