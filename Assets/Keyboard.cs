@@ -8,6 +8,8 @@ public class Keyboard : MonoBehaviour
     public GameObject Laser;
     public GameObject LaneSelector;
 
+    private bool _gotKeyForBeat;
+
     private readonly List<Note> _selectedLanes = new List<Note>();
 
     private SpriteRenderer _grayBoxRenderer;
@@ -19,7 +21,12 @@ public class Keyboard : MonoBehaviour
 
     void Update()
     {
-        if (Timer.IsOnBeat)
+        if (Timer.ChangedBeat)
+        {
+            _gotKeyForBeat = false;
+        }
+
+        if (Timer.IsOnBeat && !_gotKeyForBeat)
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
@@ -50,6 +57,7 @@ public class Keyboard : MonoBehaviour
 
     private void PressKey(Note note)
     {
+        _gotKeyForBeat = true;
         if (Timer.IsColorBeat)
         {
             foreach (var selectedLane in _selectedLanes)
