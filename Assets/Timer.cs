@@ -8,10 +8,11 @@ public class Timer : MonoBehaviour
 
     public static float TimeInBeat;
     public static int CurrentBeat;
-
+    public static bool ChangedBeat;
+    
     public static bool IsStartOfLanePhase
     {
-        get { return _changedBeat && CurrentBeat == 0; }
+        get { return ChangedBeat && CurrentBeat == 0; }
     }
 
     public static bool IsOnBeat
@@ -24,7 +25,6 @@ public class Timer : MonoBehaviour
         get { return CurrentBeat >= BeatsPerMeasure / 2; }
     }
 
-    private static bool _changedBeat;
 
 
     void Update()
@@ -32,10 +32,10 @@ public class Timer : MonoBehaviour
         var prevTimeInBeat = TimeInBeat;
         TimeInBeat = Time.time % TimePerBeat;
 
-        _changedBeat = false;
+        ChangedBeat = false;
         if (prevTimeInBeat > TimeInBeat)
         {
-            _changedBeat = true;
+            ChangedBeat = true;
             CurrentBeat++;
             CurrentBeat %= BeatsPerMeasure;
         }
