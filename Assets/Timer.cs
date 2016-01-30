@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 public class Timer : MonoBehaviour
 {
     public const float BeatThreshold = 0.35f;
@@ -9,7 +10,10 @@ public class Timer : MonoBehaviour
     public static float TimeInBeat;
     public static int CurrentBeat;
     public static bool ChangedBeat;
-    
+
+    public AudioSource Audio;
+    public AudioClip BassClip;
+
     public static bool IsStartOfLanePhase
     {
         get { return ChangedBeat && CurrentBeat == 0; }
@@ -25,8 +29,6 @@ public class Timer : MonoBehaviour
         get { return CurrentBeat >= BeatsPerMeasure / 2; }
     }
 
-
-
     void Update()
     {
         var prevTimeInBeat = TimeInBeat;
@@ -38,6 +40,10 @@ public class Timer : MonoBehaviour
             ChangedBeat = true;
             CurrentBeat++;
             CurrentBeat %= BeatsPerMeasure;
+        }
+        if (ChangedBeat)
+        {
+            Audio.PlayOneShot(BassClip);
         }
     }
 
