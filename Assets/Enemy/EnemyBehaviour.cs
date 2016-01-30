@@ -5,6 +5,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.name);
+        Score.Instance.Value++;
+        Destroy(gameObject);
     }
 }
