@@ -47,8 +47,9 @@ public class EnemyFactory : MonoBehaviour
     public void SpawnEnemy(Enemy enemy)
     {
         var clone = Instantiate(EnemyGameObject);
-        clone.transform.position = Notes.KeyPositions[enemy.Note] + Vector2.up * OffsetFromNote;
+        clone.transform.position = Notes.KeyPositions[enemy.Lane] + Vector2.up * OffsetFromNote;
         clone.GetComponent<Rigidbody2D>().velocity = Vector2.down * enemy.Speed;
+        clone.GetComponent<EnemyBehaviour>().SetEnemy(enemy);
     }
 
     public void ProceduralSpawns(int seed = 0)
@@ -64,7 +65,7 @@ public class EnemyFactory : MonoBehaviour
         }
         
         var types = 3; //number of potential types
-        var endTime = 20;
+        var endTime = 200;
 
         var probabilityOfEnemyCount = new[] {0.1, 0.8, 1};
 
@@ -83,21 +84,25 @@ public class EnemyFactory : MonoBehaviour
                         break;
                     }
 
-                    var note = Notes.GetRandom();
-                    while (notesAlreadySpawned.Contains(note))
+                    var lane = Notes.GetRandom();
+                    var color = Notes.GetRandom();
+
+                    while (notesAlreadySpawned.Contains(lane))
                     {
-                        note = Notes.GetRandom();
+                        lane = Notes.GetRandom();
                     }
+
                     var type = random.Next(types);
 
                     _spawns.Add(new Enemy()
                     {
                         Time = i,
                         Speed = 2f,
-                        Note = note,
+                        Lane = lane,
+                        Color = color,
                         Type = type
                     });
-                    notesAlreadySpawned.Add(note);
+                    notesAlreadySpawned.Add(lane);
                 }
 
                 break;

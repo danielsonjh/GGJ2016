@@ -17,6 +17,13 @@ public static class Notes
         {Note.C, new Vector2(2, 0)},
     };
 
+    public static readonly Dictionary<Note, Color> EntityColor = new Dictionary<Note, Color>()
+    {
+        {Note.A, Color.red},
+        {Note.B, Color.green},
+        {Note.C, Color.blue},
+    };
+
     public static int Length
     {
         get

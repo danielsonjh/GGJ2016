@@ -55,6 +55,7 @@ public class Keyboard : MonoBehaviour
             foreach (var selectedLane in _selectedLanes)
             {
                 var laser = InstantiateAt(Laser, selectedLane);
+                laser.GetComponent<LazerBehavior>().Note = note;
                 Destroy(laser, LaserDuration);
             }
         }
