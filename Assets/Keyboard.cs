@@ -5,8 +5,7 @@ using UnityEngine;
 public class Keyboard : MonoBehaviour
 {
     public const float LaserDuration = 0.3f;
-    public const float PitchMultiplier = 1.05946f;
-
+    
     public GameObject Laser;
     public GameObject LaneSelector;
 
@@ -33,33 +32,33 @@ public class Keyboard : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A))
             {
                 PressKey(Note.A);
-                Lead.pitch = Mathf.Pow(PitchMultiplier, -6);
+                Lead.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -6);
                 Lead.Play();
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
                 PressKey(Note.B);
-                Lead.pitch = Mathf.Pow(PitchMultiplier, -3);
+                Lead.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -3);
                 Lead.Play();
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 PressKey(Note.C);
-                Lead.pitch = Mathf.Pow(PitchMultiplier, -1);
+                Lead.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -1);
                 Lead.Play();
             }
 
             else if (Input.GetKeyDown(KeyCode.F))
             {
                 PressKey(Note.D);
-                Lead.pitch = Mathf.Pow(PitchMultiplier, 1);
+                Lead.pitch = Mathf.Pow(AudioManager.PitchMultiplier, 1);
                 Lead.Play();
             }
             else if (Input.GetKeyDown(KeyCode.G) && Stats.Instance.Difficult) 
 
             {
                 PressKey(Note.E);
-                Lead.pitch = Mathf.Pow(PitchMultiplier, 4);
+                Lead.pitch = Mathf.Pow(AudioManager.PitchMultiplier, 4);
                 Lead.Play();
             }
         }
