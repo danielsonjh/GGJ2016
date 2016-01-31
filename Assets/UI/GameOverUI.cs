@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
     private bool _showing = false;
     private CanvasGroup _canvasGroup;
+    public GameObject ScoreTextGameObject;
 
 	void Start ()
 	{
@@ -21,6 +23,7 @@ public class GameOverUI : MonoBehaviour
             Destroy(GameObject.Find("BeatIndicatorFactory"));
             Destroy(GameObject.Find("EnemyFactory"));
             GetComponent<CanvasFader>().FadeIn();
+            ScoreTextGameObject.GetComponent<Text>().text = "SCORE: " + Stats.Instance.Score;
         }
     }
 }
