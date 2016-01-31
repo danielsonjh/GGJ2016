@@ -12,13 +12,16 @@ public class Stats : MonoBehaviour
 
 
     public bool Difficult;
-
+    
     public static Stats Instance { get; private set; }
 
     private Text _scoreText;
 
 	void Awake () {
-	    if (Instance != null)
+        Lives = 10;
+        Score = 0;
+
+        if (Instance != null)
 	    {
 	        DestroyImmediate(gameObject);
 	    }
