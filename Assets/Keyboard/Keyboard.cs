@@ -8,6 +8,8 @@ public class Keyboard : MonoBehaviour
     
     public GameObject Laser;
     public GameObject LaneSelector;
+    public Sprite LaneSelectSprite;
+    public Sprite ColorSelectSprite;
 
     public static bool GotKeyForBeat;
     public AudioSource Lead;
@@ -19,6 +21,13 @@ public class Keyboard : MonoBehaviour
     void Start()
     {
         Timer.OnChangeBeat += ResetKeyForBeatFlag;
+        Timer.OnChangeBeat += ChangeKeyIcon;
+    }
+
+    void OnDestroy()
+    {
+        Timer.OnChangeBeat -= ResetKeyForBeatFlag;
+        Timer.OnChangeBeat -= ChangeKeyIcon;
     }
 
     void Update()
@@ -99,6 +108,25 @@ public class Keyboard : MonoBehaviour
     private void ResetKeyForBeatFlag()
     {
         GotKeyForBeat = false;
+    }
+
+    private void ChangeKeyIcon()
+    {
+        for (int i = 0; i < ModeControl.numberOfLanes; i++)
+        {
+            var child = transform.GetChild(i);
+            var spriteRenderer = child.GetComponent<SpriteRenderer>();
+            if (Timer.IsColorBeat)
+            {
+                spriteRenderer.sprite = ColorSelectSprite;
+                spriteRenderer.color = Notes.EntityColor[(Note) i];
+            }
+            else
+            {
+                spriteRenderer.sprite = LaneSelectSprite;
+                spriteRenderer.color = Color.white;
+            }
+        }
     }
 
     private void PlayLeadAudio(int pitchShift)

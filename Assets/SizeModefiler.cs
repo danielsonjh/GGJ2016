@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class SizeModefiler : MonoBehaviour {
 
@@ -9,9 +8,9 @@ public class SizeModefiler : MonoBehaviour {
     
     // Use this for initialization
 	void Start ()
-    {
-        GetComponent<Transform>().position = new Vector3(initX, initY, 0);
-    }
+	{
+	    GetComponent<Transform>().position = new Vector3(initX, initY, 0);
+	}
 	
 	void SetSize(int Lanes)
     {
