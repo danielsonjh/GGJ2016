@@ -11,9 +11,11 @@ public class Menu : MonoBehaviour
         _canvasFader = GameObject.Find("ScreenFader").GetComponent<CanvasFader>();
     }
 
-    public void StartGame()
+    public void StartGame(int level)
     {
         _canvasFader.FadeIn();
+        ModeControl.numberOfColors = level + 2;
+        ModeControl.numberOfLanes = level + 2;
         StartCoroutine(StartScene("Game"));
     }
 

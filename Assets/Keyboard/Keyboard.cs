@@ -22,6 +22,7 @@ public class Keyboard : MonoBehaviour
     {
         Timer.OnChangeBeat += ResetKeyForBeatFlag;
         Timer.OnChangeBeat += ChangeKeyIcon;
+        ChangeKeyIcon();
     }
 
     void OnDestroy()
@@ -126,6 +127,15 @@ public class Keyboard : MonoBehaviour
                 spriteRenderer.sprite = LaneSelectSprite;
                 spriteRenderer.color = Color.white;
             }
+
+        }
+        
+        for (int i = ModeControl.numberOfLanes; i<5; i++)
+        {
+            var child = transform.GetChild(i);
+            var spriteRenderer = child.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.clear;
+            
         }
     }
 
