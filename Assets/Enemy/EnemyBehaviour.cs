@@ -5,7 +5,6 @@ public class EnemyBehaviour : MonoBehaviour
 {
 
     public GameObject DeathGameObject;
-
     public Enemy Enemy;
 
     private static Vector2 MovementVelocity = new Vector2(0,-6f);
@@ -46,6 +45,7 @@ public class EnemyBehaviour : MonoBehaviour
             var deathExplosion = Instantiate(DeathGameObject);
             deathExplosion.transform.position = this.transform.position;
             deathExplosion.GetComponent<ParticleSystem>().Play();
+            Camera.main.GetComponent<AudioManager>().PlayEnemyAudio(Enemy.Color);
             Destroy(gameObject);
             if (name == "Laser(Clone)")
             {

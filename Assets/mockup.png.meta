@@ -1,11 +1,13 @@
 fileFormatVersion: 2
 guid: a8db575b5737fe447a3d450a3d403413
-timeCreated: 1454205635
+timeCreated: 1454220422
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: mockup_0
     21300002: mockup_1
+    21300004: mockup_2
+    21300006: mockup_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -56,7 +58,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2
+        y: 471
         width: 101
         height: 101
       alignment: 0
@@ -70,8 +72,8 @@ TextureImporter:
     - name: mockup_1
       rect:
         serializedVersion: 2
-        x: 213
-        y: 0
+        x: 130
+        y: 470
         width: 104
         height: 104
       alignment: 0
@@ -86,6 +88,79 @@ TextureImporter:
         - {x: 45, y: 45}
         - {x: 45, y: -45}
         - {x: -45, y: -45}
+    - name: mockup_2
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 445
+        width: 711
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 134.5, y: 62}
+        - {x: 120.5, y: 73}
+        - {x: 78.5, y: 73}
+        - {x: 68.5, y: 71}
+        - {x: 56.5, y: 65}
+        - {x: 56.5, y: -72}
+        - {x: 146.5, y: -72}
+        - {x: 146.5, y: -11}
+        - {x: 126.5, y: 10}
+      - - {x: 269.5, y: 73}
+        - {x: 264.5, y: 61}
+        - {x: 264.5, y: -72}
+        - {x: 343.5, y: -72}
+        - {x: 354.5, y: -54}
+        - {x: 354.5, y: 70}
+        - {x: 351.5, y: 73}
+      - - {x: -328.5, y: 75}
+        - {x: -350.5, y: -54}
+        - {x: -350.5, y: -71}
+        - {x: -173.5, y: -71}
+        - {x: -173.5, y: 75}
+      - - {x: -62.5, y: 74}
+        - {x: -64.5, y: 72}
+        - {x: -64.5, y: -69}
+        - {x: -62.5, y: -71}
+        - {x: -53.5, y: -71}
+        - {x: -51.5, y: -69}
+        - {x: -51.5, y: 72}
+        - {x: -53.5, y: 74}
+    - name: mockup_3
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 192
+        width: 458
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -129, y: 71.5}
+        - {x: -139, y: 71.5}
+        - {x: -141, y: 69.5}
+        - {x: -173, y: 71.5}
+        - {x: -228, y: 71.5}
+        - {x: -228, y: -71.5}
+        - {x: -227, y: -72.5}
+        - {x: -127, y: -72.5}
+        - {x: -127, y: 69.5}
+      - - {x: -17, y: 71.5}
+        - {x: -17, y: -72.5}
+        - {x: -4, y: -72.5}
+        - {x: -4, y: 71.5}
+      - - {x: 106, y: 70.5}
+        - {x: 104, y: 68.5}
+        - {x: 104, y: 59.5}
+        - {x: 106, y: 57.5}
+        - {x: 156, y: -72.5}
+        - {x: 169, y: -72.5}
+        - {x: 221, y: 59.5}
+        - {x: 221, y: 68.5}
+        - {x: 219, y: 70.5}
     outline: []
   spritePackingTag: 
   userData: 
