@@ -37,7 +37,7 @@ public class EnemyBehaviour : MonoBehaviour
             deathExplosion.transform.position = this.transform.position;
             deathExplosion.GetComponent<ParticleSystem>().Play();
             Destroy(gameObject);
-            if (name == "Laser(Clone")
+            if (name == "Laser(Clone)")
             {
                 Stats.Instance.Score++;
             }
