@@ -20,12 +20,13 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Update()
     {
+        /*
         if (moveDistance >= 0)
         {
             float distanceToMove = Mathf.Abs(MovementVelocity.y * Time.deltaTime);
             transform.position -= new Vector3(0, distanceToMove);
             moveDistance -= distanceToMove;
-        }
+        }*/
     }
     void Start()
     {
@@ -39,7 +40,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     void OnChangeBeat()
     {
-            moveDistance = moveDistanceInit;
+        //float distanceToMove = Mathf.Abs(MovementVelocity.y * Time.deltaTime);
+        transform.position -= new Vector3(0, moveDistanceInit);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -54,7 +56,7 @@ public class EnemyBehaviour : MonoBehaviour
             Destroy(gameObject);
             if (name == "Laser(Clone)")
             {
-                Stats.Instance.Score++;
+                Stats.Instance.IncreaseScoreByOne();
             }
         }
     }
