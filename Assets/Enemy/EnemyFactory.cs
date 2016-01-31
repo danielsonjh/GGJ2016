@@ -103,7 +103,7 @@ public class EnemyFactory : MonoBehaviour
     public List<Enemy> GenerateWave()
     {
 
-        var probabilityOfEnemyCount = new[] { 0.1, 0.8, 1 };
+        var probabilityOfEnemyCount = new[] { 0.1, 0.6, 0.8, 0.95, 1};
 
         System.Random random;
         random = new Random();
