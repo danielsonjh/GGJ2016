@@ -25,40 +25,33 @@ public class Keyboard : MonoBehaviour
     {
         if (Timer.IsOnBeat && !GotKeyForBeat)
         {
-            var audio = Instantiate(Lead);
             if (Input.GetKeyDown(KeyCode.A))
             {
                 PressKey(Note.A);
-                audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -6);
-                audio.Play();
+                PlayLeadAudio(-6);
             }
             else if (Input.GetKeyDown(KeyCode.S) && (ModeControl.numberOfColors >= 2 || ModeControl.numberOfLanes >= 2))
             {
                 PressKey(Note.B);
-                audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -3);
-                audio.Play();
+                PlayLeadAudio(-3);
             }
             else if (Input.GetKeyDown(KeyCode.D) && (ModeControl.numberOfColors >= 3 || ModeControl.numberOfLanes >= 3))
             {
                 PressKey(Note.C);
-                audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -1);
-                audio.Play();
+                PlayLeadAudio(-1);
             }
 
             else if (Input.GetKeyDown(KeyCode.F) && (ModeControl.numberOfColors>=4||ModeControl.numberOfLanes>=4))
             {
                 PressKey(Note.D);
-                audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, 1);
-                audio.Play();
+                PlayLeadAudio(1);
             }
             else if (Input.GetKeyDown(KeyCode.G) && (ModeControl.numberOfColors >= 5 || ModeControl.numberOfLanes >= 5)) 
 
             {
                 PressKey(Note.E);
-                audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, 4);
-                audio.Play();
+                PlayLeadAudio(4);
             }
-            Destroy(audio, 10f);
         }
 
         if (Timer.IsStartOfLanePhase)
@@ -106,5 +99,13 @@ public class Keyboard : MonoBehaviour
     private void ResetKeyForBeatFlag()
     {
         GotKeyForBeat = false;
+    }
+
+    private void PlayLeadAudio(int pitchShift)
+    {
+        var audio = Instantiate(Lead);
+        audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, pitchShift);
+        audio.Play();
+        Destroy(audio, 10f);
     }
 }
