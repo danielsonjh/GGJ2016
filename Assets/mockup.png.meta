@@ -1,9 +1,11 @@
 fileFormatVersion: 2
 guid: a8db575b5737fe447a3d450a3d403413
-timeCreated: 1454135130
+timeCreated: 1454205635
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: mockup_0
+    21300002: mockup_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,7 +40,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -49,7 +51,41 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: mockup_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 101
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50.5, y: 50.5}
+        - {x: -50.5, y: -50.5}
+        - {x: 50.5, y: -50.5}
+        - {x: 50.5, y: 50.5}
+    - name: mockup_1
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 0
+        width: 104
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 10, y: 10, z: 10, w: 10}
+      outline:
+      - - {x: -52, y: 52}
+        - {x: -52, y: -52}
+        - {x: 52, y: -52}
+        - {x: 52, y: 52}
+      - - {x: -45, y: 45}
+        - {x: 45, y: 45}
+        - {x: 45, y: -45}
+        - {x: -45, y: -45}
     outline: []
   spritePackingTag: 
   userData: 

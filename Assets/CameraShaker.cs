@@ -24,6 +24,13 @@ public class CameraShaker : MonoBehaviour
 
     private void ResetShakeAmount()
     {
-        _shakeAmount = ShakeAmountInit;
+        if (Timer.CurrentBeat >= Timer.BeatsPerMeasure/2)
+        {
+            _shakeAmount = ShakeAmountInit;
+        }
+        else
+        {
+            _shakeAmount = ShakeAmountInit / 2;
+        }
     }
 }
