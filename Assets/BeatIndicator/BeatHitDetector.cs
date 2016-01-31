@@ -6,7 +6,7 @@ public class BeatHitDetector : MonoBehaviour {
     
     public const float TextDuration = Timer.TimePerBeat * 0.5f;
     public const float BeatIndicatorOffset = 2;
-    public readonly Vector2 TextPosition = new Vector2(-4.5f, 0.5f);
+    public readonly Vector2 TextPosition = new Vector2(-4.55f, 0.5f);
     public GameObject HitText;
     public GameObject MissText;
     
