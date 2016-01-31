@@ -14,7 +14,6 @@ public class GameOverUI : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Stats.Instance.Lives);
         if (Stats.Instance.Lives <= 0 && !_showing)
         {
             _showing = true;

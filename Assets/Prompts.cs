@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class Prompts : MonoBehaviour
 {
+    public Color ActiveColor;
+    public Color InactiveColor;
+    public Color ShadowColor;
 
     public GameObject LanePromptObject,
         ColorPromptObject,
@@ -18,34 +20,32 @@ public class Prompts : MonoBehaviour
 
     void Start()
     {
-        Timer.OnPreciseBeat += pUpdate;
+        Timer.OnPreciseBeat += PromptUpdate;
     }
 
-
-	// Update is called once per frame
-	void pUpdate () 
+    void PromptUpdate () 
     {
         switch (CurrentBeat) 
         {
             case 0:
                 DeselectAll();
-                LanePromptObject.GetComponent<Text>().color = Color.white;
-                LanePromptShadowObject.GetComponent<Text>().color = Color.black;
+                LanePromptObject.GetComponent<Text>().color = ActiveColor;
+                LanePromptShadowObject.GetComponent<Text>().color = ShadowColor;
                 break;
             case 1:
                 DeselectAll();
-                LanePromptObject2.GetComponent<Text>().color = Color.white;
-                LanePromptShadowObject2.GetComponent<Text>().color = Color.black;
+                LanePromptObject2.GetComponent<Text>().color = ActiveColor;
+                LanePromptShadowObject2.GetComponent<Text>().color = ShadowColor;
                 break;
             case 2:
                 DeselectAll();
-                ColorPromptObject.GetComponent<Text>().color = Color.white;
-                ColorPromptShadowObject.GetComponent<Text>().color = Color.black;
+                ColorPromptObject.GetComponent<Text>().color = ActiveColor;
+                ColorPromptShadowObject.GetComponent<Text>().color = ShadowColor;
                 break;
             case 3:
                 DeselectAll();
-                ColorPromptObject2.GetComponent<Text>().color = Color.white;
-                ColorPromptShadowObject2.GetComponent<Text>().color = Color.black;
+                ColorPromptObject2.GetComponent<Text>().color = ActiveColor;
+                ColorPromptShadowObject2.GetComponent<Text>().color = ShadowColor;
                 break;
 
         }
@@ -56,13 +56,13 @@ public class Prompts : MonoBehaviour
 
     void DeselectAll()
     {
-        LanePromptObject.GetComponent<Text>().color = Color.gray;
+        LanePromptObject.GetComponent<Text>().color = InactiveColor;
         LanePromptShadowObject.GetComponent<Text>().color = Color.clear;
-        ColorPromptObject.GetComponent<Text>().color = Color.gray;
+        ColorPromptObject.GetComponent<Text>().color = InactiveColor;
         ColorPromptShadowObject.GetComponent<Text>().color = Color.clear;
-        LanePromptObject2.GetComponent<Text>().color = Color.gray;
+        LanePromptObject2.GetComponent<Text>().color = InactiveColor;
         LanePromptShadowObject2.GetComponent<Text>().color = Color.clear;
-        ColorPromptObject2.GetComponent<Text>().color = Color.gray;
+        ColorPromptObject2.GetComponent<Text>().color = InactiveColor;
         ColorPromptShadowObject2.GetComponent<Text>().color = Color.clear;
     }
 }
