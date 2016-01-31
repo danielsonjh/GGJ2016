@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour {
     void Start ()
     {
         Timer.OnNextDiv += OnNextDivHandler;
+        Bass1.volume = 0.5f;
     }
 
     void OnDestroy()
