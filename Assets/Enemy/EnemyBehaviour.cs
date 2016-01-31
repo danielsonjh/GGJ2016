@@ -31,7 +31,7 @@ public class EnemyBehaviour : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         var name = other.gameObject.name;
-        if (name == "Keyboard" || name == "Laser(Clone)" && other.GetComponent<LazerBehavior>().Note == Enemy.Color)
+        if (name == "Keyboard" || name == "Laser(Clone)"  && other.GetComponent<LazerBehavior>().Note == Enemy.Color)
         {
             var deathExplosion = Instantiate(DeathGameObject);
             deathExplosion.transform.position = this.transform.position;
