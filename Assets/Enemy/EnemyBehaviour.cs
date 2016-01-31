@@ -30,7 +30,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other);
         var name = other.gameObject.name;
         if (name == "Keyboard" || name == "Laser(Clone)" && other.GetComponent<LazerBehavior>().Note == Enemy.Color)
         {
