@@ -2,29 +2,40 @@
 
 public class AudioManager : MonoBehaviour {
 
-    public AudioSource Audio;
-    public AudioClip BassClip;
-    public AudioClip BassClip2;
+    public AudioSource Bass1;
+    public AudioSource Bass2;
+    public AudioSource Snare;
 
     void Start ()
     {
-        Timer.OnPreciseBeat += OnPreciseBeatHandler;
+        Timer.OnNextDiv += OnNextDivHandler;
     }
 
     void OnDestroy()
     {
-        Timer.OnPreciseBeat -= OnPreciseBeatHandler;
+        Timer.OnNextDiv -= OnNextDivHandler;
     }
 
-    private void OnPreciseBeatHandler()
+    private void OnNextDivHandler()
     {
-        if (Timer.CurrentBeat == 0)
+        switch (Timer.CurrentDiv)
         {
-            Audio.PlayOneShot(BassClip2);
-        }
-        else
-        {
-            Audio.PlayOneShot(BassClip);
+            case 0:
+                if (Timer.CurrentBeat == 0)
+                {
+                    Bass2.Play();
+                } else
+                {
+                    Bass1.Play();
+                }
+                break;
+            case 2:
+                break;
+            case 4:
+                Snare.Play();
+                break;
+            case 6:
+                break;
         }
     }
 }
