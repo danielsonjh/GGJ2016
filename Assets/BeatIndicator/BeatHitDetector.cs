@@ -6,9 +6,8 @@ public class BeatHitDetector : MonoBehaviour {
     
     public const float TextDuration = Timer.TimePerBeat * 0.5f;
     public const float BeatIndicatorOffset = 2;
-    public readonly Vector2 TextPosition = new Vector2(-4.55f, 0.5f);
-    public GameObject HitText;
-    public GameObject MissText;
+    public Sprite WhiteX;
+    public Sprite ColorX;
     
     private bool _alreadyShowingText = false;
 
@@ -24,22 +23,25 @@ public class BeatHitDetector : MonoBehaviour {
             var tooLateForBeat = !Timer.IsOnBeat && !Keyboard.GotKeyForBeat;
             if (tooLateForBeat)
             {
-                var beatIndicator = GetClosestBeatIndicator();
-                if (beatIndicator != null && beatIndicator.transform.position.y < BeatIndicatorOffset)
-                {
-                    beatIndicator.tag = "Untagged";
-                    beatIndicator.GetComponent<BeatIndicator>().Miss();
-                    InstantiateTextIndicator(MissText);
-                }
-            }
-            else if (Timer.IsOnBeat && Keyboard.GotKeyForBeat)
-            {
+                _alreadyShowingText = true;
                 var beatIndicator = GetClosestBeatIndicator();
                 if (beatIndicator != null && beatIndicator.transform.position.y < BeatIndicatorOffset)
                 {
                     beatIndicator.tag = "Untagged";
                     beatIndicator.GetComponent<BeatIndicator>().Hit();
-                    InstantiateTextIndicator(HitText);
+
+                    ReplaceBeatIndicatorSprites(beatIndicator);
+                }
+            }
+            else if (Timer.IsOnBeat && Keyboard.GotKeyForBeat)
+            {
+                _alreadyShowingText = true;
+
+                var beatIndicator = GetClosestBeatIndicator();
+                if (beatIndicator != null && beatIndicator.transform.position.y < BeatIndicatorOffset)
+                {
+                    beatIndicator.tag = "Untagged";
+                    beatIndicator.GetComponent<BeatIndicator>().Hit();
                 }
                 
             }
@@ -56,12 +58,12 @@ public class BeatHitDetector : MonoBehaviour {
         _alreadyShowingText = false;
     }
 
-    private void InstantiateTextIndicator(GameObject prefab)
+    private void ReplaceBeatIndicatorSprites(GameObject prefab)
     {
-        _alreadyShowingText = true;
-        var clone = Instantiate(prefab);
-        prefab.transform.position = TextPosition;
-        Destroy(clone, TextDuration);
+        foreach (var sprite in prefab.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sprite.sprite = prefab.GetComponent<BeatIndicator>().IsColored ? ColorX : WhiteX;
+        }
     }
 
     private GameObject GetClosestBeatIndicator()

@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 08ea239ced338974badce7a2490d6cf3
-timeCreated: 1454200403
+timeCreated: 1454271535
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BeatIndicator: {fileID: 101364, guid: e6f012298a158b94e940d2326fd864e0, type: 2}
+  - WhiteRing: {fileID: 21300008, guid: a8db575b5737fe447a3d450a3d403413, type: 3}
+  - ColorRing: {fileID: 21300010, guid: a8db575b5737fe447a3d450a3d403413, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
