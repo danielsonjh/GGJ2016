@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: c8814340749467847a0d09c52ea47ead
-timeCreated: 1454133535
+timeCreated: 1454274635
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Laser: {fileID: 144222, guid: e918bb6b5db5ab7408c4fc7540f736ca, type: 2}
+  - LaneSelector: {fileID: 180468, guid: e85910be59b75b7429d0ab863deb861f, type: 2}
+  - LaneSelectSprite: {fileID: 21300018, guid: a8db575b5737fe447a3d450a3d403413, type: 3}
+  - ColorSelectSprite: {fileID: 21300016, guid: a8db575b5737fe447a3d450a3d403413,
+      type: 3}
+  - Lead: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
