@@ -49,7 +49,10 @@ public class Keyboard : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Stats.Instance.Lives--;
+        if (other.name == "Enemy(Clone)")
+        {
+            Stats.Instance.Lives--;
+        }
     }
 
     private void PressKey(Note note)
