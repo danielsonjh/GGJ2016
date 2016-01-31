@@ -6,6 +6,8 @@ public class Stats : MonoBehaviour
     public int Score;
     public int Lives;
 
+    public bool Difficult;
+
     public static Stats Instance { get; private set; }
 
     private Text _scoreText;
