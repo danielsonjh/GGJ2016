@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
 
     public static bool IsOnBeat
     {
-        get { return TimeInBeat <= BeatThreshold/2; }
+        get { return Math.Abs(TimeInBeat) <= BeatThreshold/2; }
     }
 
     public static bool IsColorBeat
