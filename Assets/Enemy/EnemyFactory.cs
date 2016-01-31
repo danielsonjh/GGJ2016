@@ -64,23 +64,50 @@ public class EnemyFactory : MonoBehaviour
         clone.GetComponent<EnemyBehaviour>().SetEnemy(enemy);
     }
 
-    public List<Enemy> GenerateWave(int seed = 0)
+    /*
+    generate an enemy with random color and lane
+    */
+    public Enemy GenerateEnemy()
     {
-        System.Random random;
-        if (seed == 0)
+        
+        Enemy enemy = new Enemy()
         {
-            random = new Random();
-        }
-        else
+            Speed = EnemySpeed,
+            Lane = Notes.GetRandom(),
+            Color = Notes.GetRandom()
+        };
+            //add to list of all enemies
+            _spawns.Add(enemy);
+        return enemy;
+
+    }
+
+    /*
+    generate an enemy with given color and lane
+    */
+    public Enemy GenerateEnemy(Note color, Note lane)
+    {
+        Enemy enemy = new Enemy()
+
         {
-            random = new Random(seed);
-        }
+            Speed = EnemySpeed,
+            Lane = lane,
+            Color = color
+        };
+        //add to list of all enemies
+        _spawns.Add(enemy);
+        return enemy;
 
-        var types = 3; //number of potential types
+    }
 
+    public List<Enemy> GenerateWave()
+    {
 
         var probabilityOfEnemyCount = new[] { 0.1, 0.8, 1 };
 
+        System.Random random;
+        random = new Random();
+        
         //determine number of enemies spawned
         var r = random.NextDouble();
         var numEnemies = 0;
@@ -94,7 +121,7 @@ public class EnemyFactory : MonoBehaviour
         }
 
         //determine lanes for enemies
-        var EnemyLanes = new Note[numEnemies]; ;
+        var EnemyLanes = new Note[numEnemies];
         for (int k = 0; k < numEnemies; k++)
         {
             bool uniqueLane = false;
@@ -125,17 +152,7 @@ public class EnemyFactory : MonoBehaviour
         for (int j = 0; j < numEnemies; j++)
         {
             var color = Notes.GetRandom();
-            var type = random.Next(types);
-
-            Enemy enemy = new Enemy()
-            {
-                Speed = EnemySpeed,
-                Lane = EnemyLanes[j],
-                Color = color,
-                Type = type
-            };
-            EnemyWave.Add(enemy);
-            _spawns.Add(enemy);
+            EnemyWave.Add(GenerateEnemy(color, EnemyLanes[j]));
         }
 
         return EnemyWave;
