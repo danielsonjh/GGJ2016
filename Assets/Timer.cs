@@ -5,13 +5,14 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     public const float BeatThreshold = 0.15f;
-    public const float TimePerBeat = 0.6f;
+    public const float TimePerBeat = 0.68f;
     public const int BeatsPerMeasure = 4;
     public const int DivsPerBeat = 8;
 
     public static float TimeInBeat;
     public static int CurrentBeat;
     public static int CurrentDiv;
+    public static int CurrentMeasure;
 
     public static event Action OnChangeBeat;
     public static event Action OnPreciseBeat;
@@ -55,6 +56,10 @@ public class Timer : MonoBehaviour
             ChangedBeat = true;
             CurrentBeat++;
             CurrentBeat %= BeatsPerMeasure;
+            if (CurrentBeat == 0)
+            {
+                CurrentMeasure++;
+            }
             CurrentDiv = 0;
 
             if (OnChangeBeat != null) OnChangeBeat();
