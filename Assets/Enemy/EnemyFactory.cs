@@ -37,6 +37,7 @@ public class EnemyFactory : MonoBehaviour
                 probabilities = ProbabilityOfEnemyCount;
                 count = 3;
             }
+
             var enemies = GenerateWave(probabilities, count);
             foreach (var enemy in enemies)
             {
