@@ -25,38 +25,40 @@ public class Keyboard : MonoBehaviour
     {
         if (Timer.IsOnBeat && !GotKeyForBeat)
         {
+            var audio = Instantiate(Lead);
             if (Input.GetKeyDown(KeyCode.A))
             {
                 PressKey(Note.A);
-                Lead.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -6);
-                Lead.Play();
+                audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -6);
+                audio.Play();
             }
             else if (Input.GetKeyDown(KeyCode.S) && (ModeControl.numberOfColors >= 2 || ModeControl.numberOfLanes >= 2))
             {
                 PressKey(Note.B);
-                Lead.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -3);
-                Lead.Play();
+                audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -3);
+                audio.Play();
             }
             else if (Input.GetKeyDown(KeyCode.D) && (ModeControl.numberOfColors >= 3 || ModeControl.numberOfLanes >= 3))
             {
                 PressKey(Note.C);
-                Lead.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -1);
-                Lead.Play();
+                audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -1);
+                audio.Play();
             }
 
             else if (Input.GetKeyDown(KeyCode.F) && (ModeControl.numberOfColors>=4||ModeControl.numberOfLanes>=4))
             {
                 PressKey(Note.D);
-                Lead.pitch = Mathf.Pow(AudioManager.PitchMultiplier, 1);
-                Lead.Play();
+                audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, 1);
+                audio.Play();
             }
             else if (Input.GetKeyDown(KeyCode.G) && (ModeControl.numberOfColors >= 5 || ModeControl.numberOfLanes >= 5)) 
 
             {
                 PressKey(Note.E);
-                Lead.pitch = Mathf.Pow(AudioManager.PitchMultiplier, 4);
-                Lead.Play();
+                audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, 4);
+                audio.Play();
             }
+            Destroy(audio, 10f);
         }
 
         if (Timer.IsStartOfLanePhase)

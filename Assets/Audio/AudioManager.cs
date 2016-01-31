@@ -63,7 +63,9 @@ public class AudioManager : MonoBehaviour {
                 pitchModifier = 11;
                 break;
         }
-        EnemyAudio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, pitchModifier);
-        EnemyAudio.Play();
+        var audio = Instantiate(EnemyAudio);
+        audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, pitchModifier);
+        audio.Play();
+        Destroy(audio, 10f);
     }
 }
