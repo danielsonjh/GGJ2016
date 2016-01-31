@@ -14,9 +14,9 @@ public class Timer : MonoBehaviour
     public static event Action OnChangeBeat;
     public static event Action OnPreciseBeat;
 
+    public static bool PassedPreciseBeat;
     private static bool ChangedBeat;
-    private static bool PassedPreciseBeat;
-    
+
     public static bool IsStartOfLanePhase
     {
         get { return ChangedBeat && CurrentBeat == 0; }
@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
 
     public static bool IsOnBeat
     {
-        get { return TimeInBeat <= BeatThreshold; }
+        get { return TimeInBeat <= BeatThreshold/2; }
     }
 
     public static bool IsColorBeat
@@ -35,10 +35,10 @@ public class Timer : MonoBehaviour
     void Update()
     {
         var prevTimeInBeat = TimeInBeat;
-        TimeInBeat = Time.time % TimePerBeat;
+        TimeInBeat = Time.time % TimePerBeat - BeatThreshold/2f;
 
         ChangedBeat = false;
-        var startedNewBeat = prevTimeInBeat > TimeInBeat;
+        var startedNewBeat = prevTimeInBeat > TimeInBeat + BeatThreshold/2f;
         if (startedNewBeat)
         {
             PassedPreciseBeat = false;
@@ -49,7 +49,7 @@ public class Timer : MonoBehaviour
             if (OnChangeBeat != null) OnChangeBeat();
         }
 
-        if (!PassedPreciseBeat && TimeInBeat > BeatThreshold/2f)
+        if (!PassedPreciseBeat && TimeInBeat > 0)
         {
             PassedPreciseBeat = true;
             if (OnPreciseBeat != null) OnPreciseBeat();

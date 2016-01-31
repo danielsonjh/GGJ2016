@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a4e85aa78ef8b6b408d3e4b0343747cd
+timeCreated: 1454222619
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - HitText: {fileID: 138922, guid: 7454b4aa229a8c94c9635507a5734a71, type: 2}
+  - MissText: {fileID: 185766, guid: e43cd37bc11a82344b9ab34f15313e22, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

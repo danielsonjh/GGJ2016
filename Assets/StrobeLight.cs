@@ -7,13 +7,13 @@ public class StrobeLight : MonoBehaviour
 
     void Update ()
 	{
-        if (Timer.TimeInBeat <= Timer.BeatThreshold / 2)
+        if (Timer.TimeInBeat <= 0)
         {
             LerpCameraColor(BeatColor, Timer.TimeInBeat / (Timer.BeatThreshold / 2));
         }
-        else if (Timer.TimeInBeat <= Timer.BeatThreshold)
+        else if (Timer.TimeInBeat <= Timer.BeatThreshold/2f)
         {
-            LerpCameraColor(OffbeatColor, Timer.TimeInBeat / Timer.BeatThreshold);
+            LerpCameraColor(OffbeatColor, (Timer.TimeInBeat + Timer.BeatThreshold/2f) / Timer.BeatThreshold);
         }
 	}
 
