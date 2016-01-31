@@ -30,7 +30,7 @@ public class CameraShaker : MonoBehaviour
         }
         else
         {
-            _shakeAmount = ShakeAmountInit / 2;
+            _shakeAmount = 0;//ShakeAmountInit / 2;
         }
     }
 }

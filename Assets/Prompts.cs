@@ -23,6 +23,11 @@ public class Prompts : MonoBehaviour
         Timer.OnPreciseBeat += PromptUpdate;
     }
 
+    void OnDestroy()
+    {
+        Timer.OnPreciseBeat -= PromptUpdate;
+    }
+
     void PromptUpdate () 
     {
         switch (CurrentBeat) 

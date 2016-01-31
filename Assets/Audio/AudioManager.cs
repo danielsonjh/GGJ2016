@@ -8,16 +8,23 @@ public class AudioManager : MonoBehaviour {
 
     void Start ()
     {
-        Timer.OnPreciseBeat += () =>
+        Timer.OnPreciseBeat += OnPreciseBeatHandler;
+    }
+
+    void OnDestroy()
+    {
+        Timer.OnPreciseBeat -= OnPreciseBeatHandler;
+    }
+
+    private void OnPreciseBeatHandler()
+    {
+        if (Timer.CurrentBeat == 0)
         {
-            if (Timer.CurrentBeat == 0)
-            {
-                Audio.PlayOneShot(BassClip2);
-            }
-            else
-            {
-                Audio.PlayOneShot(BassClip);
-            }
-        };
+            Audio.PlayOneShot(BassClip2);
+        }
+        else
+        {
+            Audio.PlayOneShot(BassClip);
+        }
     }
 }
