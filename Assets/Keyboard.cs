@@ -38,11 +38,13 @@ public class Keyboard : MonoBehaviour
             {
                 PressKey(Note.C);
             }
-            else if (Input.GetKeyDown(KeyCode.F) && Stats.Instance.Difficult)
+
+            else if (Input.GetKeyDown(KeyCode.F))
             {
                 PressKey(Note.D);
             }
             else if (Input.GetKeyDown(KeyCode.G) && Stats.Instance.Difficult) 
+
             {
                 PressKey(Note.E);
             }
