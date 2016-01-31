@@ -38,10 +38,14 @@ public class Stats : MonoBehaviour
     {
         HitThisMeasure++;
         ScoreThisMeasure = HitThisMeasure*HitThisMeasure;
+
+        
     }
 
     void Update()
     {
+       
+
         if (Timer.CurrentBeat == 0)
         {
             Score += ScoreThisMeasure;
@@ -51,9 +55,14 @@ public class Stats : MonoBehaviour
         if (ScoreThisMeasure > 0)
         {
             //set "+4, +16, etc" textbox
+            
         }
 
-    _scoreText.text = "SCORE: " + Score.ToString() + "\n" +
+        var basebpm = 60f / Timer.InitialTimePerBeat;
+        var currentbpm = basebpm + 0.5f * Score;
+        Timer.TimePerBeat = 60f / currentbpm;
+
+        _scoreText.text = "SCORE: " + Score.ToString() + "\n" +
                           "LIVES: " + Lives.ToString();
 	}
 }
