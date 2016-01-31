@@ -4,7 +4,7 @@ public class BeatHitDetector : MonoBehaviour {
 
     public const string BeatIndicatorTag = "BeatIndicator";
     
-    public const float TextDuration = Timer.TimePerBeat * 0.5f;
+    public const float TextDuration = Timer.InitialTimePerBeat * 0.5f;
     public const float BeatIndicatorOffset = 2;
     public Sprite WhiteX;
     public Sprite ColorX;

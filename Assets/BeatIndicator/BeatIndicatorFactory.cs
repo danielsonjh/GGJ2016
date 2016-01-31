@@ -6,7 +6,7 @@ public class BeatIndicatorFactory : MonoBehaviour
     public Sprite WhiteRing;
     public Sprite ColorRing;
 
-    private const float SpawnTimeOffset = Timer.TimePerBeat * Timer.BeatsPerMeasure;
+    private const float SpawnTimeOffset = Timer.InitialTimePerBeat * Timer.BeatsPerMeasure;
     private readonly Vector2 _beatIndicatorVel = new Vector2(0, -6f);
     private readonly Vector2 _beatIndicatorDest = new Vector2(0, 1);
 

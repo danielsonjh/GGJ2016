@@ -9,11 +9,13 @@ public class AudioManager : MonoBehaviour {
     public AudioSource Snare;
     public AudioSource EnemyAudio;
     public AudioSource Ambient;
+    public AudioClip GongClip;
+    private int prevScore;
 
     void Start ()
     {
         Timer.OnNextDiv += OnNextDivHandler;
-        Bass1.volume = 0.5f;
+        Bass1.volume = 0.75f;
     }
 
     void OnDestroy()
@@ -33,6 +35,12 @@ public class AudioManager : MonoBehaviour {
                 {
                     Bass1.Play();
                 }
+                var curScore = Stats.Instance.Score / 10;
+                if (curScore > prevScore)
+                {
+                    PlayGong();
+                    prevScore = curScore;
+                }
                 break;
             case 2:
                 break;
@@ -43,7 +51,15 @@ public class AudioManager : MonoBehaviour {
                 break;
         }
     }
-    
+
+    private void PlayGong()
+    {
+        var audio = Instantiate(Ambient);
+        audio.clip = GongClip;
+        audio.Play();
+        Destroy(audio, 10f);
+    }
+
     public void PlayEnemyAudio(Note color)
     {
         var pitchModifier = 0;
