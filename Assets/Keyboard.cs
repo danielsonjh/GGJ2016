@@ -37,14 +37,6 @@ public class Keyboard : MonoBehaviour
             {
                 PressKey(Note.C);
             }
-            else if (Input.GetKeyDown(KeyCode.F))
-            {
-                PressKey(Note.D);
-            }
-            else if (Input.GetKeyDown(KeyCode.G)) 
-            {
-                PressKey(Note.E);
-            }
         }
 
         if (Timer.IsStartOfLanePhase)
