@@ -16,12 +16,8 @@ public class Keyboard : MonoBehaviour
 
     private readonly List<Note> _selectedLanes = new List<Note>();
 
-    private SpriteRenderer _grayBoxRenderer;
-
     void Start()
     {
-        _grayBoxRenderer = transform.FindChild("GrayBox").GetComponent<SpriteRenderer>();
-
         Timer.OnChangeBeat += ResetKeyForBeatFlag;
     }
 
@@ -68,7 +64,6 @@ public class Keyboard : MonoBehaviour
             _selectedLanes.Clear();
         }
 
-        ShowGrayBox(!Timer.IsColorBeat);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -98,10 +93,6 @@ public class Keyboard : MonoBehaviour
         }
     }
 
-    private void ShowGrayBox(bool shown)
-    {
-        _grayBoxRenderer.enabled = shown;
-    }
 
     private GameObject InstantiateAt(GameObject prefab, Note note)
     {

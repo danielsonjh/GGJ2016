@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour
 
     public static bool IsOnBeat
     {
-        get { return Math.Abs(TimeInBeat) <= BeatThreshold/2; }
+        get { return Math.Abs(TimeInBeat) <= BeatThreshold; }
     }
 
     public static bool IsColorBeat
@@ -48,7 +48,7 @@ public class Timer : MonoBehaviour
             if (OnNextDiv != null) OnNextDiv();
         }
         ChangedBeat = false;
-        var startedNewBeat = prevTimeInBeat > TimeInBeat + BeatThreshold / 2f;
+        var startedNewBeat = prevTimeInBeat > TimeInBeat + BeatThreshold;
         if (startedNewBeat)
         {
             PassedPreciseBeat = false;
