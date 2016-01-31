@@ -12,6 +12,7 @@ public class Timer : MonoBehaviour
     public static float TimeInBeat;
     public static int CurrentBeat;
     public static int CurrentDiv;
+    public static int CurrentMeasure;
 
     public static event Action OnChangeBeat;
     public static event Action OnPreciseBeat;
@@ -55,6 +56,10 @@ public class Timer : MonoBehaviour
             ChangedBeat = true;
             CurrentBeat++;
             CurrentBeat %= BeatsPerMeasure;
+            if (CurrentBeat == 0)
+            {
+                CurrentMeasure++;
+            }
             CurrentDiv = 0;
 
             if (OnChangeBeat != null) OnChangeBeat();
