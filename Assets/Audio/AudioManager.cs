@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour {
             case 2:
                 break;
             case 4:
-                Snare.Play();
+                //Snare.Play();
                 break;
             case 6:
                 break;
