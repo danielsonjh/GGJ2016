@@ -54,7 +54,7 @@ public class EnemyBehaviour : MonoBehaviour
             Destroy(gameObject);
             if (name == "Laser(Clone)")
             {
-                Stats.Instance.Score++;
+                Stats.Instance.IncreaseScoreByOne();
             }
         }
     }
