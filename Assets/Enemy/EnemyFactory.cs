@@ -13,6 +13,8 @@ public class EnemyFactory : MonoBehaviour
 
     private bool AlreadySpawnedThisMeasure = false;
     private int CurrentTime = 0;
+    private double[] ProbabilityOfEnemyCountDifficult = { 0.1, 0.6, 0.8, 0.95, 1 };
+    private double[] ProbabilityOfEnemyCount = { 0.1, 0.8, 1};
 
     void Start()
     {
@@ -23,7 +25,20 @@ public class EnemyFactory : MonoBehaviour
     {
         if (!AlreadySpawnedThisMeasure && Timer.CurrentBeat == 0)
         {
-            var enemies = GenerateWave();
+            double[] probabilities;
+            int count;
+            if (Stats.Instance.Difficult)
+            {
+                probabilities = ProbabilityOfEnemyCountDifficult;
+                count = 5;
+            }
+            else
+            {
+                probabilities = ProbabilityOfEnemyCount;
+                count = 3;
+            }
+
+            var enemies = GenerateWave(probabilities, count);
             foreach (var enemy in enemies)
             {
                 SpawnEnemy(enemy);
@@ -100,10 +115,10 @@ public class EnemyFactory : MonoBehaviour
 
     }
 
-    public List<Enemy> GenerateWave()
+    public List<Enemy> GenerateWave(double[] probabilities, int maxTypes)
     {
 
-        var probabilityOfEnemyCount = new[] { 0.1, 0.6, 0.8, 0.95, 1};
+        
 
         System.Random random;
         random = new Random();
@@ -111,9 +126,9 @@ public class EnemyFactory : MonoBehaviour
         //determine number of enemies spawned
         var r = random.NextDouble();
         var numEnemies = 0;
-        for (int n = 0; n < probabilityOfEnemyCount.Length; n++)
+        for (int n = 0; n < probabilities.Length; n++)
         {
-            if (r <= probabilityOfEnemyCount[n])
+            if (r <= probabilities[n])
             {
                 numEnemies = n;
                 break;
@@ -130,7 +145,7 @@ public class EnemyFactory : MonoBehaviour
             while (!uniqueLane)
             {
                 uniqueLane = true;
-                var lane = Notes.GetRandom();
+                var lane = Notes.GetRandom(maxTypes);
                 //get new lane if repeat
                 for (int l = 0; l < EnemyLanes.Length; l++)
                 {
@@ -151,7 +166,7 @@ public class EnemyFactory : MonoBehaviour
         var EnemyWave = new List<Enemy>();
         for (int j = 0; j < numEnemies; j++)
         {
-            var color = Notes.GetRandom();
+            var color = Notes.GetRandom(maxTypes);
             EnemyWave.Add(GenerateEnemy(color, EnemyLanes[j]));
         }
 

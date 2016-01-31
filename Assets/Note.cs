@@ -37,4 +37,7 @@ public static class Notes
     {
         return (Note)Random.Range(0, Length);
     }
+    public static Note GetRandom(int max) {
+        return (Note)Random.Range(0, max);
+    }
 }
