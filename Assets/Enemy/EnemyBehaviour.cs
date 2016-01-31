@@ -8,7 +8,7 @@ public class EnemyBehaviour : MonoBehaviour
     public Enemy Enemy;
 
     private float moveDistance;
-    private float moveDistanceInit = 0.3f;
+    private float moveDistanceInit = 1.5f;
 
     private static Vector2 MovementVelocity = new Vector2(0,-6f);
 
@@ -41,7 +41,11 @@ public class EnemyBehaviour : MonoBehaviour
     void OnChangeBeat()
     {
         //float distanceToMove = Mathf.Abs(MovementVelocity.y * Time.deltaTime);
-        transform.position -= new Vector3(0, moveDistanceInit);
+        if (Timer.CurrentBeat == 0)
+        {
+            transform.position -= new Vector3(0, moveDistanceInit);
+        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
