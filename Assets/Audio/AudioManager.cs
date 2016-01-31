@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour {
     public AudioSource Bass2;
     public AudioSource Snare;
     public AudioSource EnemyAudio;
+    public AudioSource Ambient;
 
     void Start ()
     {

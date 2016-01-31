@@ -5,6 +5,7 @@ public class ContextualDisplay : MonoBehaviour
 {
     public int LaneNum;
     private bool _showing = false;
+    private bool ColorType;
     private CanvasGroup _canvasGroup;
 
     void Start()

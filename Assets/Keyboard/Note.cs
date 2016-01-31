@@ -28,6 +28,15 @@ public static class Notes
         {Note.E, new Color(1,0.7f, 0.8f) }
     };
 
+    public static readonly Dictionary<Note, Color> SecondaryColor = new Dictionary<Note, Color>()
+    {
+        {Note.A, new Color(1, 0.6f, 0.3f)}, // orange
+        {Note.B, new Color(0.5f, 1, 0.7f)}, // lime green
+        {Note.C, new Color(0,5f, 1, 1)}, // cyan
+        {Note.D, new Color(1, 1, 0.8f)}, // beige
+        {Note.E, new Color(1, 0.7f, 0.8f) } //
+    };
+
     public static int Length
     {
         get { return Enum.GetNames(typeof(Note)).Length; }
