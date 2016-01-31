@@ -13,8 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void SetEnemy(Enemy enemy)
     {
         Enemy = enemy;
-        GetComponent<SpriteRenderer>().color = Notes.EntityColor[Enemy.
-            Color];
+        GetComponent<SpriteRenderer>().color = Notes.EntityColor[Enemy.Color];
     }
 
     void Update()
@@ -31,6 +30,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other);
         var name = other.gameObject.name;
         if (name == "Keyboard" || name == "Laser(Clone)" && other.GetComponent<LazerBehavior>().Note == Enemy.Color)
         {
