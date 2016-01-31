@@ -42,7 +42,7 @@ public class Timer : MonoBehaviour
         var prevTimeInBeat = TimeInBeat;
         var prevDiv = CurrentDiv;
 
-        TimeInBeat = Time.time % TimePerBeat - BeatThreshold;
+        TimeInBeat = Time.timeSinceLevelLoad % TimePerBeat - BeatThreshold;
 
         CurrentDiv = (int)(((((TimeInBeat) / TimePerBeat) + 1) * DivsPerBeat) % DivsPerBeat);
         if (prevDiv != CurrentDiv)
