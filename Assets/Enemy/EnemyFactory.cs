@@ -14,7 +14,7 @@ public class EnemyFactory : MonoBehaviour
     private bool AlreadySpawnedThisMeasure = false;
     private int CurrentTime = 0;
 
-    private double[] ProbabilityOfEnemyCount = { 0.1, 0.6, 0.8, 0.95, 1 };
+    private double[] ProbabilityOfEnemyCount = { 0.1, 0.6, 0.8, 0.95, 1};
     
     void Start()
     {
@@ -40,7 +40,7 @@ public class EnemyFactory : MonoBehaviour
             AlreadySpawnedThisMeasure = false;
         }
     }
-    
+
     public List<Enemy> GetSpawns(){
         var enemiesToSpawn = new List<Enemy>();
         foreach (var e in EnemyCollection)
@@ -59,6 +59,7 @@ public class EnemyFactory : MonoBehaviour
         CurrentTime++;
         return enemiesToSpawn;
     }
+    
 
     public void SpawnEnemy(Enemy enemy)
     {
@@ -109,10 +110,17 @@ public class EnemyFactory : MonoBehaviour
 
         System.Random random;
         random = new Random();
-        
+
+        var r = 0.0;
         //determine number of enemies spawned
-        var r = random.NextDouble() * ProbabilityOfEnemyCount[ModeControl.numberOfLanes];
-        var numEnemies = 0;
+        if (ModeControl.numberOfLanes <= ProbabilityOfEnemyCount.Length)
+        {
+            r = random.NextDouble() * ProbabilityOfEnemyCount[ModeControl.numberOfLanes - 1];
+        } else
+        {
+            r = random.NextDouble() * ProbabilityOfEnemyCount[ProbabilityOfEnemyCount.Length - 1];
+        }
+            var numEnemies = 0;
         for (int n = 0; n < ModeControl.numberOfLanes; n++)
         {
             if (r <= ProbabilityOfEnemyCount[n])
@@ -152,8 +160,17 @@ public class EnemyFactory : MonoBehaviour
 
         var EnemyWave = new List<Enemy>();
         for (int j = 0; j < numEnemies; j++)
+            
         {
-            var color = (Note)random.Next(0, ModeControl.numberOfColors);
+            Note color = 0;
+            if (ModeControl.numberOfColors <= 5)
+            {
+                color = (Note)random.Next(0, ModeControl.numberOfColors);
+            }
+            else
+            {
+                color = (Note)random.Next(0, 5);
+            }
             EnemyWave.Add(GenerateEnemy(color, EnemyLanes[j]));
         }
 
