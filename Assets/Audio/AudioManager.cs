@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour {
     void Start ()
     {
         Timer.OnNextDiv += OnNextDivHandler;
+        Bass1.volume = 0.5f;
     }
 
     void OnDestroy()
@@ -46,6 +47,7 @@ public class AudioManager : MonoBehaviour {
     public void PlayEnemyAudio(Note color)
     {
         var pitchModifier = 0;
+        var rand = Random.Range(0f, 1f);
         switch (color)
         {
             case Note.A:
@@ -63,6 +65,10 @@ public class AudioManager : MonoBehaviour {
             case Note.E:
                 pitchModifier = 11;
                 break;
+        }
+        if (rand > 0.5f)
+        {
+            pitchModifier -= 12;
         }
         var audio = Instantiate(EnemyAudio);
         audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, pitchModifier);

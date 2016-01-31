@@ -4,8 +4,8 @@ using System.Collections;
 public class ContextualDisplay : MonoBehaviour
 {
     public int LaneNum;
+    public bool LanePosition;
     private bool _showing = false;
-    private bool ColorType;
     private CanvasGroup _canvasGroup;
 
     void Start()
@@ -17,15 +17,30 @@ public class ContextualDisplay : MonoBehaviour
 
     void Update()
     {
-        if (ModeControl.numberOfLanes >= LaneNum && !_showing)
+        if (LanePosition = true)
         {
-            _showing = true;
-            GetComponent<CanvasFader>().FadeIn();
-        }
-        else if(ModeControl.numberOfLanes < LaneNum && _showing)
+            if (ModeControl.numberOfLanes >= LaneNum && !_showing)
+            {
+                _showing = true;
+                GetComponent<CanvasFader>().FadeIn();
+            }
+            else if (ModeControl.numberOfLanes < LaneNum && _showing)
+            {
+                _showing = false;
+                GetComponent<CanvasFader>().FadeOut();
+            }
+        } else
         {
-            _showing = false;
-            GetComponent<CanvasFader>().FadeOut();
+            if (ModeControl.numberOfColors >= LaneNum && !_showing)
+            {
+                _showing = true;
+                GetComponent<CanvasFader>().FadeIn();
+            }
+            else if (ModeControl.numberOfColors < LaneNum && _showing)
+            {
+                _showing = false;
+                GetComponent<CanvasFader>().FadeOut();
+            }
         }
     }
 }
