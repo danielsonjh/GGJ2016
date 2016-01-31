@@ -8,7 +8,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public Enemy Enemy;
 
-    private static Vector2 MovementVelocity = new Vector2(0,-2.5f);
+    private static Vector2 MovementVelocity = new Vector2(0,-6f);
 
     public void SetEnemy(Enemy enemy)
     {
@@ -16,9 +16,19 @@ public class EnemyBehaviour : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Notes.EntityColor[Enemy.Color];
     }
 
-    void Update()
+    void Start()
     {
-        if (Timer.CurrentBeat == 0)
+        Timer.OnChangeBeat += OnChangeBeat;
+    }
+
+    void OnDestroy()
+    {
+        Timer.OnChangeBeat -= OnChangeBeat;
+    }
+
+    void OnChangeBeat()
+    {
+        if(Timer.CurrentBeat == 0)
         {
             GetComponent<Rigidbody2D>().velocity = MovementVelocity;
         }
