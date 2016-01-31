@@ -59,7 +59,7 @@ public class Stats : MonoBehaviour
         }
 
         var basebpm = 60f / Timer.InitialTimePerBeat;
-        var currentbpm = basebpm + 0.5f * Score;
+        var currentbpm = basebpm + 0.3f * Score;
         Timer.TimePerBeat = 60f / currentbpm;
 
         _scoreText.text = "SCORE: " + Score.ToString() + "\n" +
