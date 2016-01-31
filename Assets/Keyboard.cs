@@ -8,6 +8,7 @@ public class Keyboard : MonoBehaviour
     public GameObject Laser;
     public GameObject LaneSelector;
 
+
     private bool _gotKeyForBeat;
 
     private readonly List<Note> _selectedLanes = new List<Note>();
@@ -37,11 +38,11 @@ public class Keyboard : MonoBehaviour
             {
                 PressKey(Note.C);
             }
-            else if (Input.GetKeyDown(KeyCode.F))
+            else if (Input.GetKeyDown(KeyCode.F) && Stats.Instance.Difficult)
             {
                 PressKey(Note.D);
             }
-            else if (Input.GetKeyDown(KeyCode.G)) 
+            else if (Input.GetKeyDown(KeyCode.G) && Stats.Instance.Difficult) 
             {
                 PressKey(Note.E);
             }
