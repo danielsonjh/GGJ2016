@@ -17,8 +17,9 @@ public class Stats : MonoBehaviour
 
     private Text _scoreText;
 
-	void Awake () {
-        Lives = 10;
+	void Awake ()
+	{
+	    //  Lives = 5;
         Score = 0;
 
         if (Instance != null)
