@@ -9,11 +9,11 @@ public class StrobeLight : MonoBehaviour
 	{
         if (Timer.TimeInBeat <= Timer.BeatThreshold / 2)
         {
-            LerpCameraColor(OffbeatColor, Timer.TimeInBeat / (Timer.BeatThreshold / 2));
+            LerpCameraColor(BeatColor, Timer.TimeInBeat / (Timer.BeatThreshold / 2));
         }
         else if (Timer.TimeInBeat <= Timer.BeatThreshold)
         {
-            LerpCameraColor(BeatColor, Timer.TimeInBeat / Timer.BeatThreshold);
+            LerpCameraColor(OffbeatColor, Timer.TimeInBeat / Timer.BeatThreshold);
         }
 	}
 
@@ -21,6 +21,6 @@ public class StrobeLight : MonoBehaviour
     {
         var currColor = Camera.main.backgroundColor;
 
-//        Camera.main.backgroundColor = Color.Lerp(currColor, targetColor, time);
+        Camera.main.backgroundColor = Color.Lerp(currColor, targetColor, time);
     }
 }
