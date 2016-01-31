@@ -15,6 +15,11 @@ public class BeatIndicatorFactory : MonoBehaviour
         Timer.OnPreciseBeat += CreateBeatIndicator;
     }
 
+    void OnDestroy()
+    {
+        Timer.OnPreciseBeat -= CreateBeatIndicator;
+    }
+
     private void CreateBeatIndicator()
     {
         var clone = Instantiate(BeatIndicator);
