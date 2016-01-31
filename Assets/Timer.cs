@@ -38,7 +38,7 @@ public class Timer : MonoBehaviour
         TimeInBeat = Time.time % TimePerBeat - BeatThreshold/2f;
 
         ChangedBeat = false;
-        var startedNewBeat = prevTimeInBeat > TimeInBeat;
+        var startedNewBeat = prevTimeInBeat > TimeInBeat + BeatThreshold/2f;
         if (startedNewBeat)
         {
             PassedPreciseBeat = false;
