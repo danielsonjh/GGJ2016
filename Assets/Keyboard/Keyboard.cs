@@ -101,7 +101,7 @@ public class Keyboard : MonoBehaviour
     private GameObject InstantiateAt(GameObject prefab, Note note)
     {
         var clone = Instantiate(prefab);
-        clone.transform.position = Notes.KeyPositions[note];
+        clone.transform.position = Notes.KeyPositions[note]+new Vector2(0,0.8f);
         return clone;
     }
 
