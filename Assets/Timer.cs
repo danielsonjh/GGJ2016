@@ -5,7 +5,7 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     public const float BeatThreshold = 0.15f;
-    public const float TimePerBeat = 0.6f;
+    public const float TimePerBeat = 0.68f;
     public const int BeatsPerMeasure = 4;
     public const int DivsPerBeat = 8;
 
