@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class LazerBehavior : MonoBehaviour {
 
@@ -7,7 +6,7 @@ public class LazerBehavior : MonoBehaviour {
 
     void Start()
     {
-        GetComponent<SpriteRenderer>().color = Notes.EntityColor[Note];
+        GetComponentInChildren<ParticleSystem>().startColor = Notes.EntityColor[Note];
     }
 
 }
