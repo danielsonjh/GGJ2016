@@ -9,36 +9,25 @@ public class EnemyFactory : MonoBehaviour
     private const int EnemySpeed = 2;
     private const int OffsetFromNote = 10;
 
-	private List<Enemy> _spawns;
+	private List<Enemy> EnemyCollection;
 
     private bool AlreadySpawnedThisMeasure = false;
     private int CurrentTime = 0;
-    private double[] ProbabilityOfEnemyCountDifficult = { 0.1, 0.6, 0.8, 0.95, 1 };
-    private double[] ProbabilityOfEnemyCount = { 0.1, 0.8, 1};
 
+    private double[] ProbabilityOfEnemyCount = { 0.1, 0.6, 0.8, 0.95, 1 };
+    
     void Start()
     {
-        _spawns = new List<Enemy>();
+        EnemyCollection = new List<Enemy>();
     }
 
     void Update()
     {
         if (!AlreadySpawnedThisMeasure && Timer.CurrentBeat == 0)
         {
-            double[] probabilities;
-            int count;
-            if (Stats.Instance.Difficult)
-            {
-                probabilities = ProbabilityOfEnemyCountDifficult;
-                count = 5;
-            }
-            else
-            {
-                probabilities = ProbabilityOfEnemyCount;
-                count = 3;
-            }
 
-            var enemies = GenerateWave(probabilities, count);
+            var enemies = GenerateWave();
+
             foreach (var enemy in enemies)
             {
                 SpawnEnemy(enemy);
@@ -54,7 +43,7 @@ public class EnemyFactory : MonoBehaviour
     
     public List<Enemy> GetSpawns(){
         var enemiesToSpawn = new List<Enemy>();
-        foreach (var e in _spawns)
+        foreach (var e in EnemyCollection)
         {
             if (e.Time <= CurrentTime)
             {
@@ -64,7 +53,7 @@ public class EnemyFactory : MonoBehaviour
         
         foreach (var e in enemiesToSpawn)
         {
-            _spawns.Remove(e);
+            EnemyCollection.Remove(e);
         }
 
         CurrentTime++;
@@ -92,7 +81,7 @@ public class EnemyFactory : MonoBehaviour
             Color = Notes.GetRandom()
         };
             //add to list of all enemies
-            _spawns.Add(enemy);
+            EnemyCollection.Add(enemy);
         return enemy;
 
     }
@@ -110,30 +99,29 @@ public class EnemyFactory : MonoBehaviour
             Color = color
         };
         //add to list of all enemies
-        _spawns.Add(enemy);
+        EnemyCollection.Add(enemy);
         return enemy;
 
     }
 
-    public List<Enemy> GenerateWave(double[] probabilities, int maxTypes)
+    public List<Enemy> GenerateWave()
     {
 
         System.Random random;
         random = new Random();
         
         //determine number of enemies spawned
-        var r = random.NextDouble();
+        var r = random.NextDouble() * ProbabilityOfEnemyCount[ModeControl.numberOfLanes];
         var numEnemies = 0;
-        for (int n = 0; n < probabilities.Length; n++)
+        for (int n = 0; n < ModeControl.numberOfLanes; n++)
         {
-            if (r <= probabilities[n])
+            if (r <= ProbabilityOfEnemyCount[n])
             {
                 numEnemies = n;
                 break;
             }
         }
 
-        //determine lanes for enemies
         var EnemyLanes = new Note[numEnemies];
         for (int k = 0; k < numEnemies; k++)
         {
@@ -143,8 +131,7 @@ public class EnemyFactory : MonoBehaviour
             while (!uniqueLane)
             {
                 uniqueLane = true;
-                var lane = Notes.GetRandom(maxTypes);
-                //get new lane if repeat
+                var lane = Notes.GetRandom(ModeControl.numberOfLanes);
                 for (int l = 0; l < EnemyLanes.Length; l++)
                 {
                     if (lane == EnemyLanes[l])
@@ -160,11 +147,10 @@ public class EnemyFactory : MonoBehaviour
 
         }
 
-        //Generate enemies
         var EnemyWave = new List<Enemy>();
         for (int j = 0; j < numEnemies; j++)
         {
-            var color = Notes.GetRandom(maxTypes);
+            var color = Notes.GetRandom(ModeControl.numberOfColors);
             EnemyWave.Add(GenerateEnemy(color, EnemyLanes[j]));
         }
 

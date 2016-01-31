@@ -7,6 +7,9 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject DeathGameObject;
     public Enemy Enemy;
 
+    private float moveDistance;
+    private float moveDistanceInit = 0.3f;
+
     private static Vector2 MovementVelocity = new Vector2(0,-6f);
 
     public void SetEnemy(Enemy enemy)
@@ -15,6 +18,15 @@ public class EnemyBehaviour : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Notes.EntityColor[Enemy.Color];
     }
 
+    void Update()
+    {
+        if (moveDistance >= 0)
+        {
+            float distanceToMove = Mathf.Abs(MovementVelocity.y * Time.deltaTime);
+            transform.position -= new Vector3(0, distanceToMove);
+            moveDistance -= distanceToMove;
+        }
+    }
     void Start()
     {
         Timer.OnChangeBeat += OnChangeBeat;
@@ -27,14 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void OnChangeBeat()
     {
-        if(Timer.CurrentBeat == 0)
-        {
-            GetComponent<Rigidbody2D>().velocity = MovementVelocity;
-        }
-        else
-        {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
+            moveDistance = moveDistanceInit;
     }
 
     void OnTriggerEnter2D(Collider2D other)

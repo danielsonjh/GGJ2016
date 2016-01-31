@@ -16,12 +16,8 @@ public class Keyboard : MonoBehaviour
 
     private readonly List<Note> _selectedLanes = new List<Note>();
 
-    private SpriteRenderer _grayBoxRenderer;
-
     void Start()
     {
-        _grayBoxRenderer = transform.FindChild("GrayBox").GetComponent<SpriteRenderer>();
-
         Timer.OnChangeBeat += ResetKeyForBeatFlag;
     }
 
@@ -36,26 +32,26 @@ public class Keyboard : MonoBehaviour
                 audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -6);
                 audio.Play();
             }
-            else if (Input.GetKeyDown(KeyCode.S))
+            else if (Input.GetKeyDown(KeyCode.S) && (ModeControl.numberOfColors >= 2 || ModeControl.numberOfLanes >= 2))
             {
                 PressKey(Note.B);
                 audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -3);
                 audio.Play();
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.D) && (ModeControl.numberOfColors >= 3 || ModeControl.numberOfLanes >= 3))
             {
                 PressKey(Note.C);
                 audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, -1);
                 audio.Play();
             }
 
-            else if (Input.GetKeyDown(KeyCode.F))
+            else if (Input.GetKeyDown(KeyCode.F) && (ModeControl.numberOfColors>=4||ModeControl.numberOfLanes>=4))
             {
                 PressKey(Note.D);
                 audio.pitch = Mathf.Pow(AudioManager.PitchMultiplier, 1);
                 audio.Play();
             }
-            else if (Input.GetKeyDown(KeyCode.G) && Stats.Instance.Difficult) 
+            else if (Input.GetKeyDown(KeyCode.G) && (ModeControl.numberOfColors >= 5 || ModeControl.numberOfLanes >= 5)) 
 
             {
                 PressKey(Note.E);
@@ -70,7 +66,6 @@ public class Keyboard : MonoBehaviour
             _selectedLanes.Clear();
         }
 
-        ShowGrayBox(!Timer.IsColorBeat);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -100,10 +95,6 @@ public class Keyboard : MonoBehaviour
         }
     }
 
-    private void ShowGrayBox(bool shown)
-    {
-        _grayBoxRenderer.enabled = shown;
-    }
 
     private GameObject InstantiateAt(GameObject prefab, Note note)
     {
