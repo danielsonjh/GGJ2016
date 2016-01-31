@@ -13,8 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void SetEnemy(Enemy enemy)
     {
         Enemy = enemy;
-        GetComponent<SpriteRenderer>().color = Notes.EntityColor[Enemy.
-            Color];
+        GetComponent<SpriteRenderer>().color = Notes.EntityColor[Enemy.Color];
     }
 
     void Update()

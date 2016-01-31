@@ -17,15 +17,12 @@ public class Keyboard : MonoBehaviour
     void Start()
     {
         _grayBoxRenderer = transform.FindChild("GrayBox").GetComponent<SpriteRenderer>();
+
+        Timer.OnChangeBeat += ResetKeyForBeatFlag;
     }
 
     void Update()
     {
-        if (Timer.ChangedBeat)
-        {
-            _gotKeyForBeat = false;
-        }
-
         if (Timer.IsOnBeat && !_gotKeyForBeat)
         {
             if (Input.GetKeyDown(KeyCode.A))
@@ -84,5 +81,10 @@ public class Keyboard : MonoBehaviour
         var clone = Instantiate(prefab);
         clone.transform.position = Notes.KeyPositions[note];
         return clone;
+    }
+
+    private void ResetKeyForBeatFlag()
+    {
+        _gotKeyForBeat = false;
     }
 }

@@ -26,10 +26,7 @@ public static class Notes
 
     public static int Length
     {
-        get
-        {
-            return Enum.GetNames(typeof(Note)).Length;
-        }
+        get { return Enum.GetNames(typeof(Note)).Length; }
     }
 
     public static Note GetRandom()

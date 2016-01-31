@@ -21,6 +21,6 @@ public class StrobeLight : MonoBehaviour
     {
         var currColor = Camera.main.backgroundColor;
 
-        Camera.main.backgroundColor = Color.Lerp(currColor, targetColor, time);
+//        Camera.main.backgroundColor = Color.Lerp(currColor, targetColor, time);
     }
 }
