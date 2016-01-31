@@ -17,15 +17,13 @@ public class EnemyFactory : MonoBehaviour
     void Start()
     {
         _spawns = new List<Enemy>();
-
-        ProceduralSpawns();
     }
 
     void Update()
     {
         if (!AlreadySpawnedThisMeasure && Timer.CurrentBeat == 0)
         {
-            var enemies = GetSpawns();
+            var enemies = GenerateWave();
             foreach (var enemy in enemies)
             {
                 SpawnEnemy(enemy);
@@ -66,10 +64,10 @@ public class EnemyFactory : MonoBehaviour
         clone.GetComponent<EnemyBehaviour>().SetEnemy(enemy);
     }
 
-    public void ProceduralSpawns(int seed = 0)
+    public List<Enemy> GenerateWave(int seed = 0)
     {
         System.Random random;
-        if(seed == 0)
+        if (seed == 0)
         {
             random = new Random();
         }
@@ -77,50 +75,69 @@ public class EnemyFactory : MonoBehaviour
         {
             random = new Random(seed);
         }
-        
+
         var types = 3; //number of potential types
-        var endTime = 200;
 
-        var probabilityOfEnemyCount = new[] {0.1, 0.8, 1};
 
-        for (int i = 1; i < endTime; i ++)
+        var probabilityOfEnemyCount = new[] { 0.1, 0.8, 1 };
+
+        //determine number of enemies spawned
+        var r = random.NextDouble();
+        var numEnemies = 0;
+        for (int n = 0; n < probabilityOfEnemyCount.Length; n++)
         {
-            var r = random.NextDouble();
-            for (int n = 0; n < probabilityOfEnemyCount.Length; n++)
+            if (r <= probabilityOfEnemyCount[n])
             {
-                if (r > probabilityOfEnemyCount[n]) continue;
-                var notesAlreadySpawned = new List<Note>();
-
-                for (int j = 0; j < n; j++)
-                {
-                    if (notesAlreadySpawned.Count >= probabilityOfEnemyCount.Length)
-                    {
-                        break;
-                    }
-
-                    var lane = Notes.GetRandom();
-                    var color = Notes.GetRandom();
-
-                    while (notesAlreadySpawned.Contains(lane))
-                    {
-                        lane = Notes.GetRandom();
-                    }
-
-                    var type = random.Next(types);
-
-                    _spawns.Add(new Enemy()
-                    {
-                        Time = i,
-                        Speed = EnemySpeed,
-                        Lane = lane,
-                        Color = color,
-                        Type = type
-                    });
-                    notesAlreadySpawned.Add(lane);
-                }
-
+                numEnemies = n;
                 break;
             }
         }
+
+        //determine lanes for enemies
+        var EnemyLanes = new Note[numEnemies]; ;
+        for (int k = 0; k < numEnemies; k++)
+        {
+            bool uniqueLane = false;
+
+
+            while (!uniqueLane)
+            {
+                uniqueLane = true;
+                var lane = Notes.GetRandom();
+                //get new lane if repeat
+                for (int l = 0; l < EnemyLanes.Length; l++)
+                {
+                    if (lane == EnemyLanes[l])
+                    {
+                        uniqueLane = false;
+                    }
+                }
+                if (uniqueLane)
+                {
+                    EnemyLanes[k] = lane;
+                }
+            }
+
+        }
+
+        //Generate enemies
+        var EnemyWave = new List<Enemy>();
+        for (int j = 0; j < numEnemies; j++)
+        {
+            var color = Notes.GetRandom();
+            var type = random.Next(types);
+
+            Enemy enemy = new Enemy()
+            {
+                Speed = EnemySpeed,
+                Lane = EnemyLanes[j],
+                Color = color,
+                Type = type
+            };
+            EnemyWave.Add(enemy);
+            _spawns.Add(enemy);
+        }
+
+        return EnemyWave;
     }
 }
