@@ -25,7 +25,7 @@ public static class Notes
         {Note.B, Color.green},
         {Note.C, Color.blue},
         {Note.D, Color.yellow},
-        {Note.E, new Color(1,0.7f, 0.8f) }
+        {Note.E, new Color(1, 0.7f, 0.8f) } // Pink
     };
 
     public static readonly Dictionary<Note, Color> SecondaryColor = new Dictionary<Note, Color>()
@@ -34,7 +34,7 @@ public static class Notes
         {Note.B, new Color(0.5f, 1, 0.7f)}, // lime green
         {Note.C, new Color(0,5f, 1, 1)}, // cyan
         {Note.D, new Color(1, 1, 0.8f)}, // beige
-        {Note.E, new Color(1, 0.7f, 0.8f) } //
+        {Note.E, new Color(0.9f, 0.5f, 0.7f) } // light pink
     };
 
     public static int Length
