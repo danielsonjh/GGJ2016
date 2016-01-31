@@ -123,6 +123,7 @@ public class EnemyFactory : MonoBehaviour
         }
 
         var EnemyLanes = new Note[numEnemies];
+        var numOfLanesDesignated = 0;
         for (int k = 0; k < numEnemies; k++)
         {
             bool uniqueLane = false;
@@ -131,8 +132,9 @@ public class EnemyFactory : MonoBehaviour
             while (!uniqueLane)
             {
                 uniqueLane = true;
-                var lane = Notes.GetRandom(ModeControl.numberOfLanes);
-                for (int l = 0; l < EnemyLanes.Length; l++)
+                var lane = (Note)random.Next(0, ModeControl.numberOfLanes);
+                //get new lane if repeat
+                for (int l = 0; l < numOfLanesDesignated; l++)
                 {
                     if (lane == EnemyLanes[l])
                     {
@@ -142,6 +144,7 @@ public class EnemyFactory : MonoBehaviour
                 if (uniqueLane)
                 {
                     EnemyLanes[k] = lane;
+                    numOfLanesDesignated++;
                 }
             }
 
@@ -150,7 +153,7 @@ public class EnemyFactory : MonoBehaviour
         var EnemyWave = new List<Enemy>();
         for (int j = 0; j < numEnemies; j++)
         {
-            var color = Notes.GetRandom(ModeControl.numberOfColors);
+            var color = (Note)random.Next(0, ModeControl.numberOfColors);
             EnemyWave.Add(GenerateEnemy(color, EnemyLanes[j]));
         }
 
