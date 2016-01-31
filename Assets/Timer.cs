@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public const float BeatThreshold = 0.4f;
+    public const float BeatThreshold = 0.2f;
     public const float TimePerBeat = 0.6f;
     public const int BeatsPerMeasure = 4;
 
@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
 
     public static bool IsOnBeat
     {
-        get { return Math.Abs(TimeInBeat) <= BeatThreshold/2; }
+        get { return Math.Abs(TimeInBeat) <= BeatThreshold; }
     }
 
     public static bool IsColorBeat
@@ -35,10 +35,10 @@ public class Timer : MonoBehaviour
     void Update()
     {
         var prevTimeInBeat = TimeInBeat;
-        TimeInBeat = Time.time % TimePerBeat - BeatThreshold/2f;
+        TimeInBeat = Time.time % TimePerBeat - BeatThreshold;
 
         ChangedBeat = false;
-        var startedNewBeat = prevTimeInBeat > TimeInBeat + BeatThreshold/2f;
+        var startedNewBeat = prevTimeInBeat > TimeInBeat + BeatThreshold;
         if (startedNewBeat)
         {
             PassedPreciseBeat = false;

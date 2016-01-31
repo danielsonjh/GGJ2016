@@ -118,12 +118,6 @@ public class EnemyFactory : MonoBehaviour
     public List<Enemy> GenerateWave(double[] probabilities, int maxTypes)
     {
 
-<<<<<<< HEAD
-        var probabilityOfEnemyCount = new[] { 0.1, 0.6, 0.8, 0.95, 1};
-=======
-        
->>>>>>> a728c546f4e355b5c03c58d8f3cd6c697ea05c50
-
         System.Random random;
         random = new Random();
         
